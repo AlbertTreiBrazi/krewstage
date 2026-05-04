@@ -1,4 +1,4 @@
-import { Syne, DM_Sans } from 'next/font/google'
+import { Syne, Inter } from 'next/font/google'
 import '../styles/globals.css'
 import Providers from '../components/Providers'
 
@@ -14,10 +14,10 @@ const syne = Syne({
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-dm',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -44,8 +44,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
-      <body style={{ fontFamily: 'var(--font-dm, DM Sans), sans-serif' }}>
+    <html lang="en" className={`${syne.variable} ${inter.variable}`}>
+      <body style={{ fontFamily: 'var(--font-inter, Inter), system-ui, -apple-system, sans-serif' }}>
         <Providers>
           {children}
         </Providers>
