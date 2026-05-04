@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '../../lib/supabase'
-import { useAuth } from '../../hooks/useAuth'
-import { ROLES, GENRES, MOODS, PROJECT_TYPES, LOCATION_TYPES } from '../../lib/constants'
+import { supabase } from '../../../lib/supabase'
+import { useAuth } from '../../../hooks/useAuth'
+import { ROLES, GENRES, MOODS, PROJECT_TYPES, LOCATION_TYPES } from '../../../lib/constants'
 
 export default function CreateProjectPage() {
   const { user } = useAuth()
