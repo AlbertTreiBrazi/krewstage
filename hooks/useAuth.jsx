@@ -42,14 +42,17 @@ export function AuthProvider({ children }) {
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (error) throw error
     if (data.user) {
-      const { error: pe } = await supabase.from('profiles').insert({
-        id: data.user.id, email,
+      // Triggerul handle_new_user creaza automat randul in profiles.
+      // Asteptam putin sa fie sigur ca triggerul a rulat, apoi facem UPDATE.
+      await new Promise(r => setTimeout(r, 800))
+      const { error: pe } = await supabase.from('profiles').update({
+        email,
         roles: [], genres: [], instruments: [], instrument_levels: {},
         available_days: [], social_youtube: '', social_instagram: '',
         social_soundcloud: '', social_spotify: '', social_tiktok: '', website: '',
         is_venue: false, venue_name: '', venue_type: '', venue_capacity: null, venue_website: '',
         ...userData
-      })
+      }).eq('id', data.user.id)
       if (pe) throw pe
     }
     return data
