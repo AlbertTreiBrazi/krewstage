@@ -11,7 +11,7 @@ import Avatar from '../../components/Avatar'
 
 function MessagesPageInner() {
   const { user, profile: myProfile } = useAuth()
-  const [searchParams] = useSearchParams()
+  const searchParams = useSearchParams()
   const router = useRouter()
   const [conversations, setConversations] = useState([])
   const [selectedConv, setSelectedConv] = useState(null)
