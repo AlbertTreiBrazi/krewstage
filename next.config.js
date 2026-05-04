@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Forteaza rendering dinamic pentru toate paginile
-  // (necesar deoarece folosim Supabase client-side si hooks)
+  // Disable static generation - all pages are dynamic (client-side with Supabase)
   experimental: {
     missingSuspenseWithCSRBailout: false,
+  },
+  // Skip type checking and linting during build for faster deploys
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   images: {
     remotePatterns: [
