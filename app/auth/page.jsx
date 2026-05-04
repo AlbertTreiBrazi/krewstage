@@ -7,7 +7,7 @@ import { ROLES, GENRES, EXPERIENCE_LEVELS } from '../../lib/constants'
 import LoadingScreen from '../../components/LoadingScreen'
 
 function AuthPageInner() {
-  const [searchParams] = useSearchParams()
+  const searchParams = useSearchParams()
   const [mode, setMode] = useState(searchParams.get('mode') === 'register' ? 'register' : 'login')
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
