@@ -203,15 +203,20 @@ export default function LandingPage() {
 
         {/* 1. How It Works */}
         <div style={s.panel}>
-          <div style={{ ...s.sectionLabel, marginBottom: 16 }}>1. How It Works</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-            {[['📝','Post or explore'],['👥','Connect'],['🎵','Create'],['🎤','Reach the stage']].map(([ic, lb], i) => (
-              <div key={lb} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                <div style={{ textAlign: 'center', minWidth: 50 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: '50%', background: '#1a1a1a', border: '1px solid #2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, margin: '0 auto 5px' }}>{ic}</div>
-                  <div style={{ fontSize: 9, color: '#999', lineHeight: 1.3, textAlign: 'center' }}>{lb}</div>
+          <div style={{ ...s.sectionLabel, marginBottom: 18 }}>1. How It Works</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {[
+              ['📝', 'Post or explore', 'Share a project or search for opportunities'],
+              ['👥', 'Connect',         'Find the right musicians for your sound'],
+              ['🎵', 'Create',          'Collaborate and finish songs together'],
+              ['🎤', 'Reach the stage', 'Perform live, book venues, grow your fanbase'],
+            ].map(([ic, title, desc], i) => (
+              <div key={title} style={{ display: 'flex', alignItems: 'flex-start', gap: 11 }}>
+                <div style={{ width: 34, height: 34, borderRadius: '50%', background: '#1a1a1a', border: '1px solid #2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, flexShrink: 0 }}>{ic}</div>
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 2 }}>{title}</div>
+                  <div style={{ fontSize: 10, color: '#666', lineHeight: 1.4 }}>{desc}</div>
                 </div>
-                {i < 3 && <div style={{ color: '#3a3a3a', fontSize: 16, marginBottom: 14 }}>→</div>}
               </div>
             ))}
           </div>
