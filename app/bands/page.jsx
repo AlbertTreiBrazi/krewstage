@@ -113,13 +113,22 @@ function BandCard({ band, currentUserId, onClick }) {
 function CreateBandModal({ onClose, onCreated, userId }) {
   const [form, setForm] = useState({ name: '', description: '', genre: '', city: '', cover_color: BAND_COLORS[0] })
   const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
   const up = (f, v) => setForm(p => ({ ...p, [f]: v }))
   async function create() {
     if (!form.name.trim()) return
-    setSaving(true)
-    const { data, error } = await supabase.from('bands').insert({ ...form, name: form.name.trim(), owner_id: userId }).select().single()
-    if (!error) { await supabase.from('band_members').insert({ band_id: data.id, user_id: userId, role: 'owner' }); onCreated() }
-    setSaving(false)
+    setSaving(true); setError('')
+    try {
+      const { data, error: be } = await supabase.from('bands').insert({ ...form, name: form.name.trim(), owner_id: userId }).select().single()
+      if (be) throw be
+      const { error: me } = await supabase.from('band_members').insert({ band_id: data.id, user_id: userId, role: 'owner' })
+      if (me) console.error('band_members insert:', me) // non-fatal
+      onCreated()
+    } catch (err) {
+      setError(err.message || 'Failed to create band')
+    } finally {
+      setSaving(false)
+    }
   }
   return (
     <Modal onClose={onClose} title="Create a band">
@@ -139,6 +148,7 @@ function CreateBandModal({ onClose, onCreated, userId }) {
           <button className="btn btn-ghost" onClick={onClose} style={{ flex: 1, justifyContent: 'center' }}>Cancel</button>
           <button className="btn btn-brand" onClick={create} disabled={saving || !form.name.trim()} style={{ flex: 2, justifyContent: 'center' }}>{saving ? 'Creating...' : '🎸 Create band'}</button>
         </div>
+        {error && <div style={{ color: '#ef4444', fontSize: 13, padding: '8px 12px', background: 'rgba(239,68,68,0.1)', borderRadius: 8, border: '1px solid rgba(239,68,68,0.2)' }}>{error}</div>}
       </div>
     </Modal>
   )
