@@ -2,6 +2,11 @@ import { Syne, DM_Sans } from 'next/font/google'
 import '../styles/globals.css'
 import Providers from '../components/Providers'
 
+// Force all pages to be dynamic (SSR) — they depend on Supabase auth state
+// which is unavailable at build time. Without this, Next attempts to
+// statically prerender client pages and fails during the export step.
+export const dynamic = 'force-dynamic'
+
 const syne = Syne({
   subsets: ['latin'],
   weight: ['700', '800'],
