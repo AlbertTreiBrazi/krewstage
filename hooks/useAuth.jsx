@@ -42,18 +42,27 @@ export function AuthProvider({ children }) {
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (error) throw error
     if (data.user) {
-      // Triggerul handle_new_user creaza automat randul in profiles.
-      // Asteptam putin sa fie sigur ca triggerul a rulat, apoi facem UPDATE.
-      await new Promise(r => setTimeout(r, 800))
-      const { error: pe } = await supabase.from('profiles').update({
+      // Triggerul handle_new_user creaza randul in profiles (id + email).
+      // Incercam UPDATE cu retry — triggerul poate dura 1-2s.
+      const updateData = {
         email,
         roles: [], genres: [], instruments: [], instrument_levels: {},
         available_days: [], social_youtube: '', social_instagram: '',
         social_soundcloud: '', social_spotify: '', social_tiktok: '', website: '',
         is_venue: false, venue_name: '', venue_type: '', venue_capacity: null, venue_website: '',
+        open_to_collaborate: true,
         ...userData
-      }).eq('id', data.user.id)
-      if (pe) throw pe
+      }
+      // Retry de 3 ori cu delay crescator (triggerul poate fi lent)
+      for (let attempt = 0; attempt < 3; attempt++) {
+        await new Promise(r => setTimeout(r, 1000 * (attempt + 1)))
+        const { error: pe } = await supabase
+          .from('profiles')
+          .update(updateData)
+          .eq('id', data.user.id)
+        if (!pe) break
+        if (attempt === 2) console.error('[signUp] profile update failed after 3 attempts:', pe)
+      }
     }
     return data
   }
