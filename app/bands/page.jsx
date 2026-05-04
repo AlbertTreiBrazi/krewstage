@@ -1,4 +1,5 @@
 'use client'
+export const dynamic = 'force-dynamic'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
@@ -72,7 +73,7 @@ export default function BandsPage() {
       )}
 
       {showCreate && <CreateBandModal onClose={() => setShowCreate(false)} onCreated={() => { setShowCreate(false); fetchBands(); setTab('mine') }} userId={user.id} />}
-      {selectedBand && <BandDetailModal band={selectedBand} currentUser={user} currentProfile={profile} onClose={() => setSelectedBand(null)} onRefresh={fetchBands} navigate={navigate} />}
+      {selectedBand && <BandDetailModal band={selectedBand} currentUser={user} currentProfile={profile} onClose={() => setSelectedBand(null)} onRefresh={fetchBands} />}
     </div>
   )
 }
@@ -143,7 +144,8 @@ function CreateBandModal({ onClose, onCreated, userId }) {
   )
 }
 
-function BandDetailModal({ band: initialBand, currentUser, currentProfile, onClose, onRefresh, navigate }) {
+function BandDetailModal({ band: initialBand, currentUser, currentProfile, onClose, onRefresh }) {
+  const router = useRouter()
   const [band, setBand] = useState(initialBand)
   const [inviteSearch, setInviteSearch] = useState('')
   const [searchResults, setSearchResults] = useState([])
