@@ -126,13 +126,7 @@ export default function ProfilePageClient({ userId }) {
   }
 
   if (loading) return <div className="spinner" style={{ marginTop: 80 }} />
-  if (!profile) return (
-    <div style={{ maxWidth: 600, margin: '80px auto', padding: 24, textAlign: 'center' }}>
-      <h2 style={{ fontFamily: 'Syne,sans-serif', fontSize: 22, marginBottom: 8 }}>Profile not found</h2>
-      <p style={{ color: 'var(--text2)', fontSize: 14, marginBottom: 16 }}>This user doesn't exist or has been removed.</p>
-      <button className="btn btn-brand" onClick={() => router.push('/discover')}>Back to Discover</button>
-    </div>
-  )
+  if (!profile) return <div style={{ textAlign: 'center', padding: 80, color: 'var(--text3)' }}>Profile not found</div>
 
   const expLevel = EXPERIENCE_LEVELS.find(l => l.id === profile.experience_level)
   const expColor = { beginner: 'badge-blue', intermediate: 'badge-amber', professional: 'badge-green' }[profile.experience_level] || 'badge-gray'
@@ -147,12 +141,12 @@ export default function ProfilePageClient({ userId }) {
           <div style={{ width: 88, height: 88, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '3px solid var(--border2)' }}>
             {profile.avatar_url
               ? <img src={profile.avatar_url} alt={profile.full_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              : <div style={{ width: '100%', height: '100%', background: getAvatarGradient(profile.id), display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 30, color: 'white' }}>{getInitials(profile.full_name)}</div>}
+              : <div style={{ width: '100%', height: '100%', background: getAvatarGradient(profile.id), display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 30, color: 'white' }}>{getInitials(profile.full_name) || '?'}</div>}
           </div>
 
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 6 }}>
-              <h2 style={{ fontSize: 24, fontWeight: 800 }}>{profile.full_name}</h2>
+              <h2 style={{ fontSize: 24, fontWeight: 800 }}>{profile.full_name || 'Anonymous Musician'}</h2>
               {profile.is_pro && <span className="badge badge-brand">PRO</span>}
               {expLevel && <span className={`badge ${expColor}`}>{expLevel.label}</span>}
             </div>
