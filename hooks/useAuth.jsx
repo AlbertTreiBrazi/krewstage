@@ -42,10 +42,8 @@ export function AuthProvider({ children }) {
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (error) throw error
     if (data.user) {
-      // Triggerul handle_new_user creaza randul in profiles (id + email).
-      // Incercam UPDATE cu retry — triggerul poate dura 1-2s.
-      const updateData = {
-        email,
+      const profileData = {
+        id: data.user.id, email,
         roles: [], genres: [], instruments: [], instrument_levels: {},
         available_days: [], social_youtube: '', social_instagram: '',
         social_soundcloud: '', social_spotify: '', social_tiktok: '', website: '',
@@ -53,15 +51,14 @@ export function AuthProvider({ children }) {
         open_to_collaborate: true,
         ...userData
       }
-      // Retry de 3 ori cu delay crescator (triggerul poate fi lent)
+      // Upsert cu retry: INSERT daca nu exista, UPDATE daca exista
       for (let attempt = 0; attempt < 3; attempt++) {
         await new Promise(r => setTimeout(r, 1000 * (attempt + 1)))
         const { error: pe } = await supabase
           .from('profiles')
-          .update(updateData)
-          .eq('id', data.user.id)
+          .upsert(profileData, { onConflict: 'id' })
         if (!pe) break
-        if (attempt === 2) console.error('[signUp] profile update failed after 3 attempts:', pe)
+        if (attempt === 2) console.error('[signUp] profile upsert failed:', pe)
       }
     }
     return data
@@ -80,7 +77,12 @@ export function AuthProvider({ children }) {
 
   async function updateProfile(updates) {
     if (!user) throw new Error('Not authenticated')
-    const { data, error } = await supabase.from('profiles').update(updates).eq('id', user.id).select().single()
+    // Upsert: functioneaza chiar daca profilul nu exista inca in DB
+    const { data, error } = await supabase
+      .from('profiles')
+      .upsert({ id: user.id, email: user.email, ...updates }, { onConflict: 'id' })
+      .select()
+      .single()
     if (error) throw error
     setProfile(data)
     return data
