@@ -85,7 +85,7 @@ export default function LandingPage() {
 
       {/* ── NAV ── */}
       <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 40px', borderBottom: '1px solid #1a1a1a', background: 'rgba(13,13,13,0.97)', position: 'sticky', top: 0, zIndex: 100, backdropFilter: 'blur(20px)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
           <div style={{ width: 30, height: 30, borderRadius: 8, background: '#ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15 }}>🎤</div>
           <span style={{ fontSize: 19 }}>
             <span style={s.brandLogo}>Krew</span><span style={s.brandLogoOrange}>Stage</span>
@@ -93,7 +93,13 @@ export default function LandingPage() {
         </div>
         <div style={{ display: 'flex', gap: 32 }}>
           {[{l:'Explore Projects',p:'/projects'},{l:'Find Members',p:'/discover'},{l:'How It Works',p:'#how'},{l:'For Venues',p:'/venues'}].map(item => (
-            <span key={item.l} onClick={() => item.p.startsWith('#') ? null : router.push(item.p)} style={{ fontSize: 14, color: '#999', cursor: 'pointer', fontWeight: 500 }}>{item.l}</span>
+            <span key={item.l} onClick={() => {
+              if (item.p === '#how') {
+                document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })
+              } else {
+                router.push(item.p)
+              }
+            }} style={{ fontSize: 14, color: '#999', cursor: 'pointer', fontWeight: 500 }}>{item.l}</span>
           ))}
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
@@ -145,7 +151,7 @@ export default function LandingPage() {
             <div style={{ padding: '16px 14px', borderRight: '1px solid #222' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'center' }}>
                 <span style={{ fontSize: 13, fontWeight: 700 }}>Recommended Projects</span>
-                <span style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
+                <span onClick={() => router.push('/projects')} style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
                 {DEMO_PROJECTS.map((p, i) => (
@@ -175,7 +181,7 @@ export default function LandingPage() {
             <div style={{ padding: '16px 14px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'center' }}>
                 <span style={{ fontSize: 13, fontWeight: 700 }}>Messages</span>
-                <span style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
+                <span onClick={() => router.push('/auth?mode=register')} style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
               </div>
               {DEMO_MESSAGES.map(m => (
                 <div key={m.name} style={{ display: 'flex', gap: 9, marginBottom: 11, paddingBottom: 11, borderBottom: '1px solid #1e1e1e' }}>
@@ -191,7 +197,7 @@ export default function LandingPage() {
                 </div>
               ))}
               <div style={{ textAlign: 'center', marginTop: 6 }}>
-                <span style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>Go to Messages →</span>
+                <span onClick={() => router.push('/auth?mode=register')} style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>Go to Messages →</span>
               </div>
             </div>
           </div>
@@ -199,7 +205,7 @@ export default function LandingPage() {
       </div>
 
       {/* ── MIDDLE GRID: 4 panels ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.55fr 1.4fr', gap: 14, padding: '4px 40px 22px', maxWidth: 1280, margin: '0 auto' }}>
+      <div id="how" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.55fr 1.4fr', gap: 14, padding: '4px 40px 22px', maxWidth: 1280, margin: '0 auto' }}>
 
         {/* 1. How It Works */}
         <div style={s.panel}>
@@ -247,7 +253,7 @@ export default function LandingPage() {
         <div style={s.panel}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
             <div style={s.sectionLabel}>3. Featured Projects</div>
-            <span style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
+            <span onClick={() => router.push('/projects')} style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 7 }}>
             {[
@@ -338,15 +344,21 @@ export default function LandingPage() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: 18, color: '#666' }}>
-          <a href="#" style={{ color: 'inherit', display: 'flex' }}><IG /></a>
-          <a href="#" style={{ color: 'inherit', display: 'flex' }}><TT /></a>
-          <a href="#" style={{ color: 'inherit', display: 'flex' }}><YT /></a>
-          <a href="#" style={{ color: 'inherit', display: 'flex' }}><DC /></a>
-          <a href="#" style={{ color: 'inherit', display: 'flex' }}><X /></a>
+          <a href="https://instagram.com/krewstage" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}><IG /></a>
+          <a href="https://tiktok.com/@krewstage" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}><TT /></a>
+          <a href="https://youtube.com/@krewstage" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}><YT /></a>
+          <a href="https://discord.gg/krewstage" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}><DC /></a>
+          <a href="https://x.com/krewstage" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}><X /></a>
         </div>
         <div style={{ display: 'flex', gap: 22 }}>
-          {['About','Blog','Help Center','Terms','Privacy'].map(l => (
-            <span key={l} style={{ fontSize: 12, color: '#666', cursor: 'pointer' }}>{l}</span>
+          {[
+            { l: 'About', p: '/about' },
+            { l: 'Blog', p: '/blog' },
+            { l: 'Help Center', p: '/help' },
+            { l: 'Terms', p: '/terms' },
+            { l: 'Privacy', p: '/privacy' },
+          ].map(({ l, p }) => (
+            <span key={l} onClick={() => router.push('/auth')} style={{ fontSize: 12, color: '#666', cursor: 'pointer' }}>{l}</span>
           ))}
         </div>
       </div>
