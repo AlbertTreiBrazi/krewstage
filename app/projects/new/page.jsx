@@ -1,13 +1,13 @@
 'use client'
 export const dynamic = 'force-dynamic'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../../lib/supabase'
 import { useAuth } from '../../../hooks/useAuth'
 import { ROLES, GENRES, MOODS, PROJECT_TYPES, LOCATION_TYPES } from '../../../lib/constants'
 
 export default function CreateProjectPage() {
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
   const router = useRouter()
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -19,6 +19,13 @@ export default function CreateProjectPage() {
     roles_needed: [], reference_links: [''],
     demo_audio_url: '', demo_audio_key: ''
   })
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!loading && !user) router.push('/auth?mode=register')
+  }, [user, loading])
+
+  if (loading || !user) return <div className="spinner" style={{ marginTop: 80 }} />
 
   const up = (f, v) => setForm(p => ({ ...p, [f]: v }))
   const toggleRole = (r) => setForm(p => ({ ...p, roles_needed: p.roles_needed.includes(r) ? p.roles_needed.filter(x => x !== r) : [...p.roles_needed, r] }))
