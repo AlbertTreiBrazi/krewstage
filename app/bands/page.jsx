@@ -46,7 +46,7 @@ export default function BandsPage() {
     <div style={{ maxWidth: 1000, margin: '0 auto', padding: '32px 24px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <div><h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 4 }}>Bands</h2><p style={{ color: 'var(--text2)', fontSize: 14 }}>Create a band or join one</p></div>
-        <button className="btn btn-brand" onClick={() => setShowCreate(true)}>+ Create band</button>
+        <button className="btn btn-brand" onClick={() => user ? setShowCreate(true) : router.push('/auth?mode=register')}>+ Create band</button>
       </div>
 
       <div style={{ display: 'flex', background: 'var(--bg3)', borderRadius: 11, padding: 3, width: 'fit-content', marginBottom: 24 }}>
@@ -216,6 +216,7 @@ function BandDetailModal({ band: initialBand, currentUser, currentProfile, onClo
           <div style={{ display: 'flex', gap: 7 }}>
         {!isMember && !isOwner && (
           <button className="btn btn-brand btn-sm" onClick={async () => {
+            if (!currentUser) { router.push('/auth?mode=register'); return }
             await supabase.from('band_members').insert({ band_id: band.id, user_id: currentUser.id, role: 'member' })
             await createNotification({ userId: band.owner_id, type: 'new_member', title: `${currentProfile?.full_name || 'Someone'} joined "${band.name}"`, body: 'A new member has joined your band.', link: '/bands', actorId: currentUser.id })
             await refreshBand()
