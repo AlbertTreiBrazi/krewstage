@@ -106,23 +106,22 @@ export default function LandingPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '380px 1fr', gap: 32, padding: '48px 40px 28px', maxWidth: 1280, margin: '0 auto', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: 28, padding: '40px 40px 20px', maxWidth: 1320, margin: '0 auto', alignItems: 'start' }}>
 
         {/* Left copy */}
-        <div>
-          <h1 style={{ fontSize: 48, fontWeight: 800, lineHeight: 1.05, letterSpacing: '-1.5px', marginBottom: 20, color: '#fff' }}>
+        <div style={{ paddingTop: 8 }}>
+          <h1 style={{ fontFamily: 'Syne, system-ui', fontSize: 42, fontWeight: 800, lineHeight: 1.08, letterSpacing: '-1.5px', marginBottom: 16, color: '#fff' }}>
             Find your music crew.<br />
             Build songs.<br />
             <span style={{ color: '#ff6b35' }}>Reach the stage.</span>
           </h1>
-          <p style={{ fontSize: 15, color: '#888', lineHeight: 1.65, marginBottom: 28, maxWidth: 360 }}>
-            Turn music ideas into real projects — find collaborators, finish songs, start bands, and connect with venues.
+          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.65, marginBottom: 24, maxWidth: 320 }}>
+            KrewStage connects songwriters, musicians, producers, bands, and venues through real music projects — from demos and unfinished songs to collaborations, bands, and live opportunities.
           </p>
-          <div style={{ display: 'flex', gap: 10, marginBottom: 24 }}>
-            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '11px 22px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
-            <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '11px 22px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 22 }}>
+            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '11px 24px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
+            <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '11px 24px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
           </div>
-          {/* Social proof */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ display: 'flex' }}>
               {['#ff6b35','#a855f7','#3b82f6','#10b981'].map((c, i) => (
@@ -135,100 +134,102 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Right — Dashboard mockup */}
-        <div style={{ ...s.card, borderRadius: 14 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '170px 1fr 230px', minHeight: 320 }}>
+        {/* Right — Dashboard mockup exacta ca Image 2 */}
+        <div style={{ background: '#141414', border: '1px solid #1e1e1e', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.5)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '175px 1fr 215px', minHeight: 290 }}>
 
             {/* Sidebar */}
-            <div style={{ borderRight: '1px solid #222', padding: '16px 14px' }}>
+            <div style={{ borderRight: '1px solid #1e1e1e', padding: '14px 12px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 18 }}>
-                <div style={{ width: 22, height: 22, borderRadius: 6, background: '#ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11 }}>🎤</div>
-                <span style={{ fontSize: 13 }}>
-                  <span style={s.brandLogo}>Krew</span><span style={s.brandLogoOrange}>Stage</span>
+                <div style={{ width: 20, height: 20, borderRadius: 5, background: '#ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>🎤</div>
+                <span style={{ fontFamily: 'Syne,system-ui', fontWeight: 800, fontSize: 13 }}>
+                  <span style={{ color: '#ff6b35' }}>Krew</span><span style={{ color: '#f0f0f0' }}>Stage</span>
                 </span>
               </div>
-              {[['🏠','Dashboard',true],['📁','Projects',false],['👥','Find Members',false],['💬','Messages',false],['🎸','Bands',false],['👤','Profile',false]].map(([ic,lb,ac]) => (
-                <div key={lb} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '7px 10px', borderRadius: 7, marginBottom: 2, background: ac ? 'rgba(255,107,53,0.12)' : 'transparent', color: ac ? '#ff6b35' : '#666', fontSize: 12, fontWeight: ac ? 600 : 500, position: 'relative' }}>
-                  <span style={{ fontSize: 13 }}>{ic}</span>{lb}
-                  {lb === 'Messages' && <span style={{ position: 'absolute', right: 8, background: '#ff6b35', color: '#fff', fontSize: 9, width: 15, height: 15, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>3</span>}
+              <div style={{ flex: 1 }}>
+                {[['🏠','Dashboard',true],['📁','Projects',false],['👥','Find Members',false],['💬','Messages',false,2],['🎸','Bands',false],['👤','Profile',false]].map(([ic,lb,ac,badge]) => (
+                  <div key={lb} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 7, marginBottom: 2, background: ac ? 'rgba(255,107,53,0.12)' : 'transparent', color: ac ? '#ff6b35' : '#666', fontSize: 12, fontWeight: ac ? 600 : 400, position: 'relative', cursor: 'pointer' }}>
+                    <span style={{ fontSize: 13 }}>{ic}</span>{lb}
+                    {badge && <span style={{ position: 'absolute', right: 8, background: '#ff6b35', color: '#fff', fontSize: 8, minWidth: 15, height: 15, borderRadius: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, padding: '0 3px' }}>{badge}</span>}
+                  </div>
+                ))}
+              </div>
+              {/* Alex Rivera bottom */}
+              <div style={{ borderTop: '1px solid #1e1e1e', paddingTop: 10, marginTop: 8, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#ff6b35,#f7931e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 800, color: '#fff', flexShrink: 0 }}>AR</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: '#f0f0f0' }}>Alex Rivera</div>
+                  <div style={{ fontSize: 9, color: '#ff6b35' }}>View Profile</div>
                 </div>
-              ))}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
             </div>
 
-            {/* Projects — 3 coloane orizontale ca în Image 3 */}
-            <div style={{ padding: '14px 12px', borderRight: '1px solid #222' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10, alignItems: 'center' }}>
-                <span style={{ fontSize: 12, fontWeight: 700 }}>Recommended Projects</span>
+            {/* Projects — 3 coloane mari ca Image 2 */}
+            <div style={{ padding: '14px 14px', borderRight: '1px solid #1e1e1e' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'center' }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#f0f0f0' }}>Recommended Projects</span>
                 <span onClick={() => router.push('/projects')} style={{ fontSize: 9, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all projects →</span>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
                 {DEMO_PROJECTS.map((p, i) => (
-                  <div key={i} style={{ ...s.card, borderRadius: 10, cursor: 'pointer' }} onClick={() => router.push('/projects')}>
-                    <div style={{ position: 'relative', height: 80, overflow: 'hidden' }}>
+                  <div key={i} onClick={() => router.push('/projects')} style={{ background: '#1c1c1c', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', cursor: 'pointer' }}>
+                    {/* Image large */}
+                    <div style={{ position: 'relative', height: 100, overflow: 'hidden', background: '#111' }}>
                       <img src={p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 50%)' }} />
+                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 60%)' }} />
                       {p.hasAudio && (
-                        <div style={{ position: 'absolute', bottom: 5, left: 6, right: 6, background: 'rgba(0,0,0,0.7)', borderRadius: 100, padding: '2px 7px', fontSize: 8, color: '#ccc', display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <div style={{ position: 'absolute', bottom: 6, left: 6, right: 6, background: 'rgba(0,0,0,0.75)', borderRadius: 100, padding: '2px 7px', fontSize: 8, color: '#ccc', display: 'flex', alignItems: 'center', gap: 4 }}>
                           ▶ <div style={{ flex: 1, height: 1, background: '#555' }} /> 0:45
                         </div>
                       )}
                     </div>
-                    <div style={{ padding: '7px 9px' }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, lineHeight: 1.3, marginBottom: 5, color: '#eee' }}>{p.title}</div>
-                      <div style={{ marginBottom: 5 }}>
-                        <span style={{ fontSize: 8, color: '#888', marginRight: 3 }}>Looking for:</span>
-                        <span style={{ fontSize: 8, padding: '1px 6px', borderRadius: 100, background: p.roleBg, color: p.roleColor, fontWeight: 600 }}>{p.role}</span>
+                    {/* Content */}
+                    <div style={{ padding: '9px 10px' }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, lineHeight: 1.3, marginBottom: 6, color: '#eee' }}>{p.title}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 4 }}>
+                        <span style={{ fontSize: 9, color: '#666' }}>Looking for:</span>
+                        <span style={{ fontSize: 8, padding: '2px 7px', borderRadius: 100, background: p.roleBg, color: p.roleColor, fontWeight: 700 }}>{p.role}</span>
                       </div>
+                      <div style={{ fontSize: 9, color: '#666', marginBottom: 8 }}>📍 {p.location}</div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
                           {p.avs.map((c, ai) => (
-                            <div key={ai} style={{ width: 14, height: 14, borderRadius: '50%', background: c, border: '1.5px solid #181818', marginLeft: ai > 0 ? -5 : 0 }} />
+                            <div key={ai} style={{ width: 16, height: 16, borderRadius: '50%', background: c, border: '2px solid #1c1c1c', marginLeft: ai > 0 ? -6 : 0 }} />
                           ))}
-                          <span style={{ fontSize: 7, color: '#555', marginLeft: 3 }}>+{p.avs.length}</span>
+                          <span style={{ fontSize: 8, color: '#555', marginLeft: 5 }}>+{p.avs.length}</span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                          <span style={{ fontSize: 8, color: '#555' }}>📍 {p.location}</span>
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-                        </div>
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
                       </div>
                     </div>
                   </div>
-                ))}\n              </div>\n            </div>
+                ))}
+              </div>
+            </div>
 
             {/* Messages */}
-            <div style={{ padding: '16px 14px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'center' }}>
-                <span style={{ fontSize: 13, fontWeight: 700 }}>Messages</span>
-                <span style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
+            <div style={{ padding: '14px 13px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14, alignItems: 'center' }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#f0f0f0' }}>Messages</span>
+                <span onClick={() => router.push('/auth?mode=register')} style={{ fontSize: 9, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
               </div>
               {DEMO_MESSAGES.map(m => (
-                <div key={m.name} style={{ display: 'flex', gap: 9, marginBottom: 11, paddingBottom: 11, borderBottom: '1px solid #1e1e1e' }}>
-                  <img src={dicebear(m.seed)} alt={m.name} style={{ width: 30, height: 30, borderRadius: '50%', flexShrink: 0, background: '#1a1a1a' }} />
+                <div key={m.name} style={{ display: 'flex', gap: 9, marginBottom: 12, paddingBottom: 12, borderBottom: '1px solid #1e1e1e' }}>
+                  <img src={dicebear(m.seed)} alt={m.name} style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, background: '#1a1a1a' }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: 11, fontWeight: 700 }}>{m.name}</span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: '#f0f0f0' }}>{m.name}</span>
                       <span style={{ fontSize: 9, color: '#555' }}>{m.time}</span>
                     </div>
-                    <div style={{ fontSize: 10, color: '#888', marginTop: 2, lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{m.msg}</div>
+                    <div style={{ fontSize: 10, color: '#777', lineHeight: 1.4, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{m.msg}</div>
                   </div>
                   {m.unread && <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#ff6b35', marginTop: 4, flexShrink: 0 }} />}
                 </div>
               ))}
               <div style={{ textAlign: 'center', marginTop: 6 }}>
-                <span style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>Go to Messages →</span>
+                <span onClick={() => router.push('/auth?mode=register')} style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>Go to Messages →</span>
               </div>
             </div>
-          </div>
-          {/* Bottom bar — Alex Rivera */}
-          <div style={{ padding: '8px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #1e1e1e', background: '#0d0d0d' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'linear-gradient(135deg,#ff6b35,#f7931e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 800, color: '#fff' }}>AR</div>
-              <div>
-                <div style={{ fontSize: 10, fontWeight: 600 }}>Alex Rivera</div>
-                <div style={{ fontSize: 8, color: '#ff6b35' }}>View Profile</div>
-              </div>
-            </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
           </div>
         </div>
       </div>
