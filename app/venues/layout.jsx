@@ -1,3 +1,3 @@
 'use client'
-import ProtectedLayout from '../../components/ProtectedLayout'
-export default function Layout({ children }) { return <ProtectedLayout>{children}</ProtectedLayout> }
+import PublicLayout from '../../components/PublicLayout'
+export default function Layout({ children }) { return <PublicLayout>{children}</PublicLayout> }
