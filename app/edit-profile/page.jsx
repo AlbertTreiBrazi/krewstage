@@ -37,7 +37,7 @@ export default function EditProfilePage() {
         is_venue: profile?.is_venue || false,
         venue_name: profile?.venue_name || '',
         venue_type: profile?.venue_type || '',
-        venue_capacity: profile?.venue_capacity || '',
+        venue_capacity: profile?.venue_capacity || null,
         venue_website: profile?.venue_website || '',
         social_instagram: profile?.social_instagram || '',
         social_soundcloud: profile?.social_soundcloud || '',
@@ -214,7 +214,7 @@ export default function EditProfilePage() {
                 </select>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                <div><label>Capacity</label><input type="number" value={form.venue_capacity} onChange={e => up('venue_capacity', e.target.value)} placeholder="e.g. 200" /></div>
+                <div><label>Capacity</label><input type="number" value={form.venue_capacity || ''} onChange={e => up('venue_capacity', e.target.value ? parseInt(e.target.value, 10) : null)} placeholder="e.g. 200" /></div>
                 <div><label>Venue website</label><input value={form.venue_website} onChange={e => up('venue_website', e.target.value)} placeholder="https://yourvenue.com" /></div>
               </div>
             </>}
