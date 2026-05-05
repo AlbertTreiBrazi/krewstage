@@ -77,10 +77,17 @@ export function AuthProvider({ children }) {
 
   async function updateProfile(updates) {
     if (!user) throw new Error('Not authenticated')
+    // Sanitize: venue_capacity trebuie sa fie integer sau null, niciodata string gol
+    const sanitized = { ...updates }
+    if (sanitized.venue_capacity === '' || sanitized.venue_capacity === undefined) {
+      sanitized.venue_capacity = null
+    } else if (sanitized.venue_capacity !== null) {
+      sanitized.venue_capacity = parseInt(sanitized.venue_capacity, 10) || null
+    }
     // Upsert: functioneaza chiar daca profilul nu exista inca in DB
     const { data, error } = await supabase
       .from('profiles')
-      .upsert({ id: user.id, email: user.email, ...updates }, { onConflict: 'id' })
+      .upsert({ id: user.id, email: user.email, ...sanitized }, { onConflict: 'id' })
       .select()
       .single()
     if (error) throw error
