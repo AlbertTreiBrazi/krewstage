@@ -225,7 +225,7 @@ export default function ProjectDetailClient({ projectId }) {
       {/* Tabs */}
       <div style={{ display: 'flex', background: 'var(--bg3)', borderRadius: 11, padding: 3, width: 'fit-content', marginBottom: 16 }}>
         {[
-          ['details', 'Apply', !isOwner && !myApplication && project.status === 'open'],
+          ['details', 'Apply', !isOwner && !myApplication && project.status === 'open' && !!user],
           ['applications', `Applications (${applications.length})`, isOwner],
           ['chat', 'Project Chat', canChat],
         ].filter(([,, show]) => show !== false).map(([t, l]) => (
@@ -239,7 +239,16 @@ export default function ProjectDetailClient({ projectId }) {
       {/* Apply form */}
       {tab === 'details' && !isOwner && (
         <div className="card">
-          {myApplication ? (
+          {!user ? (
+            <div style={{ textAlign: 'center', padding: '20px 0' }}>
+              <p style={{ fontSize: 15, fontWeight: 600, marginBottom: 8 }}>Want to collaborate on this project?</p>
+              <p style={{ color: 'var(--text2)', fontSize: 14, marginBottom: 20 }}>Create a free account to apply and connect with musicians.</p>
+              <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+                <button className="btn btn-brand" onClick={() => router.push('/auth?mode=register')}>Sign up free</button>
+                <button className="btn btn-ghost" onClick={() => router.push('/auth')}>Log in</button>
+              </div>
+            </div>
+          ) : myApplication ? (
             <div className="alert alert-info">
               You've already applied as <strong>{getRoleInfo(myApplication.role_offered).label}</strong> — status: <strong>{myApplication.status}</strong>
             </div>
