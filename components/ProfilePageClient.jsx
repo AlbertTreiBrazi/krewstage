@@ -180,10 +180,13 @@ export default function ProfilePageClient({ userId }) {
               <button className="btn btn-ghost btn-sm" onClick={() => router.push('/edit-profile')}>✏️ Edit profile</button>
             ) : (
               <>
-                <button className={`btn btn-sm ${isFollowing ? 'btn-ghost' : 'btn-brand'}`} disabled={followLoading} onClick={toggleFollow}>
+                <button className={`btn btn-sm ${isFollowing ? 'btn-ghost' : 'btn-brand'}`}
+                  disabled={followLoading}
+                  onClick={() => user ? toggleFollow() : router.push('/auth?mode=register')}>
                   {isFollowing ? '✓ Following' : '+ Follow'}
                 </button>
                 <button className="btn btn-ghost btn-sm" onClick={async () => {
+                  if (!user) { router.push('/auth?mode=register'); return }
                   try { const id = await getOrCreateConversation(user.id, targetId); router.push(`/messages?conv=${id}`) }
                   catch { router.push('/messages') }
                 }}>💬 Message</button>
