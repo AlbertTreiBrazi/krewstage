@@ -1,7 +1,7 @@
 'use client'
 export const dynamic = 'force-dynamic'
-import { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, useRef, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
 import { getOrCreateConversation } from '../../lib/conversations'
@@ -11,13 +11,15 @@ import RoleBadge from '../../components/RoleBadge'
 
 const PAGE_SIZE = 12
 
-export default function DiscoverPage() {
+function DiscoverPageInner() {
+  const searchParams = useSearchParams()
+  const urlRole = searchParams.get('role') || ''
   const [musicians, setMusicians] = useState([])
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [search, setSearch] = useState('')
-  const [roleFilter, setRoleFilter] = useState('')
+  const [roleFilter, setRoleFilter] = useState(urlRole)
   const [genreFilter, setGenreFilter] = useState('')
   const [expFilter, setExpFilter] = useState('')
   const [locationFilter, setLocationFilter] = useState('')
@@ -243,5 +245,13 @@ function MusicianCard({ musician: m, onClick, onMessage, currentUserId }) {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function DiscoverPage() {
+  return (
+    <Suspense fallback={<div className="spinner" style={{ marginTop: 80 }} />}>
+      <DiscoverPageInner />
+    </Suspense>
   )
 }
