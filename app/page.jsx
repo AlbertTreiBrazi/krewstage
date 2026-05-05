@@ -92,8 +92,8 @@ export default function LandingPage() {
           </span>
         </div>
         <div style={{ display: 'flex', gap: 32 }}>
-          {['Explore Projects','Find Members','How It Works','For Venues'].map(l => (
-            <span key={l} style={{ fontSize: 14, color: '#999', cursor: 'pointer', fontWeight: 500 }}>{l}</span>
+          {[{l:'Explore Projects',p:'/projects'},{l:'Find Members',p:'/discover'},{l:'How It Works',p:'#how'},{l:'For Venues',p:'/venues'}].map(item => (
+            <span key={item.l} onClick={() => item.p.startsWith('#') ? null : router.push(item.p)} style={{ fontSize: 14, color: '#999', cursor: 'pointer', fontWeight: 500 }}>{item.l}</span>
           ))}
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
@@ -117,7 +117,7 @@ export default function LandingPage() {
           </p>
           <div style={{ display: 'flex', gap: 10 }}>
             <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '11px 22px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
-            <button onClick={() => router.push('/auth')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '11px 22px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
+            <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '11px 22px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
           </div>
         </div>
 
@@ -272,7 +272,7 @@ export default function LandingPage() {
           <div style={{ ...s.sectionLabel, marginBottom: 12 }}>4. Find the right collaborators</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 14 }}>
             {ROLE_CHIPS.map(r => (
-              <button key={r} onClick={() => setActiveRole(r)} style={s.pill(activeRole === r)}>{r}</button>
+              <button key={r} onClick={() => router.push(`/discover?role=${r.toLowerCase()}`)} style={s.pill(activeRole === r)} onMouseEnter={() => setActiveRole(r)} onMouseLeave={() => setActiveRole('Vocalist')}>{r}</button>
             ))}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8 }}>
@@ -319,7 +319,7 @@ export default function LandingPage() {
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
             <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '9px 16px', fontSize: 12, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
-            <button onClick={() => router.push('/auth')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '9px 16px', fontSize: 12, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
+            <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '9px 16px', fontSize: 12, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
           </div>
         </div>
       </div>
