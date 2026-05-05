@@ -179,6 +179,7 @@ export default function DiscoverPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))', gap: 14 }}>
             {musicians.map(m => <MusicianCard key={m.id} musician={m} currentUserId={user?.id} onMessage={async e => {
               e.stopPropagation()
+              if (!user) { router.push('/auth?mode=register'); return }
               try { const id = await getOrCreateConversation(user.id, m.id); router.push(`/messages?conv=${id}`) } catch { router.push('/messages') }
             }} onClick={() => router.push(`/profile/${m.id}`)} />)}
           </div>
