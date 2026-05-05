@@ -72,6 +72,8 @@ export default function DiscoverPage() {
       const results = data || []
 
       const filtered = results.filter(m => {
+        // Ascunde profiluri incomplete - fara nume sau fara nici un rol setat
+        if (!m.full_name?.trim() || !m.roles?.length) return false
         const q2 = currentSearch.toLowerCase()
         const ms = !q2 || m.full_name?.toLowerCase().includes(q2) || m.city?.toLowerCase().includes(q2) || m.bio?.toLowerCase().includes(q2)
         const mr = !currentRole || m.roles?.includes(currentRole)
@@ -232,7 +234,11 @@ function MusicianCard({ musician: m, onClick, onMessage, currentUserId }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: 12, color: 'var(--text3)' }}>👥 {m.followers_count || 0} followers</span>
         <div style={{ display: 'flex', gap: 7 }}>
-          {m.id !== currentUserId && <button className="btn btn-ghost btn-sm" onClick={onMessage}>💬 Message</button>}
+          {m.id !== currentUserId && (
+            <button className="btn btn-ghost btn-sm" onClick={onMessage}>
+              {currentUserId ? '💬 Message' : '🔓 Join to message'}
+            </button>
+          )}
           <button className="btn btn-ghost-brand btn-sm" onClick={e => { e.stopPropagation(); onClick() }}>View profile</button>
         </div>
       </div>
