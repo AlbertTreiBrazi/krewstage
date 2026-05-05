@@ -60,12 +60,16 @@ export default function ProjectsPage() {
 
       {/* Tabs */}
       <div style={{ display: 'flex', background: 'var(--bg3)', borderRadius: 11, padding: 3, width: 'fit-content', marginBottom: 20 }}>
-        {[['all', 'All open projects'], ['mine', 'My projects']].map(([t, l]) => (
-          <button key={t} onClick={() => setTab(t)}
-            style={{ padding: '8px 20px', borderRadius: 9, fontSize: 13, fontWeight: 500, border: 'none', cursor: 'pointer', fontFamily: 'DM Sans,sans-serif', transition: 'all 0.2s', background: tab === t ? 'var(--brand)' : 'transparent', color: tab === t ? '#fff' : 'var(--text2)' }}>
-            {l}
+        <button onClick={() => setTab('all')}
+          style={{ padding: '8px 20px', borderRadius: 9, fontSize: 13, fontWeight: 500, border: 'none', cursor: 'pointer', fontFamily: 'DM Sans,sans-serif', transition: 'all 0.2s', background: tab === 'all' ? 'var(--brand)' : 'transparent', color: tab === 'all' ? '#fff' : 'var(--text2)' }}>
+          All open projects
+        </button>
+        {user && (
+          <button onClick={() => setTab('mine')}
+            style={{ padding: '8px 20px', borderRadius: 9, fontSize: 13, fontWeight: 500, border: 'none', cursor: 'pointer', fontFamily: 'DM Sans,sans-serif', transition: 'all 0.2s', background: tab === 'mine' ? 'var(--brand)' : 'transparent', color: tab === 'mine' ? '#fff' : 'var(--text2)' }}>
+            My projects
           </button>
-        ))}
+        )}
       </div>
 
       {/* Filters */}
