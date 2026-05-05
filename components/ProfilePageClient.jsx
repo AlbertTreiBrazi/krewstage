@@ -126,7 +126,13 @@ export default function ProfilePageClient({ userId }) {
   }
 
   if (loading) return <div className="spinner" style={{ marginTop: 80 }} />
-  if (!profile) return <div style={{ textAlign: 'center', padding: 80, color: 'var(--text3)' }}>Profile not found</div>
+  if (!profile) return (
+    <div style={{ maxWidth: 600, margin: '80px auto', padding: 24, textAlign: 'center' }}>
+      <h2 style={{ fontFamily: 'Syne,sans-serif', fontSize: 22, marginBottom: 8 }}>Profile not found</h2>
+      <p style={{ color: 'var(--text2)', fontSize: 14, marginBottom: 16 }}>This user doesn't exist or has been removed.</p>
+      <button className="btn btn-brand" onClick={() => router.push('/discover')}>Back to Discover</button>
+    </div>
+  )
 
   const expLevel = EXPERIENCE_LEVELS.find(l => l.id === profile.experience_level)
   const expColor = { beginner: 'badge-blue', intermediate: 'badge-amber', professional: 'badge-green' }[profile.experience_level] || 'badge-gray'
