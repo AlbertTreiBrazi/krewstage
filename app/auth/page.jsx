@@ -63,12 +63,15 @@ function AuthPageInner() {
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, background: 'var(--bg)' }}>
       <div style={{ width: '100%', maxWidth: 480 }}>
 
-        {/* Logo */}
+        {/* Logo + back */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{ fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 34, color: 'var(--brand)' }}>
+          <div onClick={() => router.push('/')} style={{ fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 34, color: 'var(--brand)', cursor: 'pointer', display: 'inline-block' }}>
             Krew<span style={{ color: 'var(--text2)', fontWeight: 400 }}>Stage</span>
           </div>
           <p style={{ color: 'var(--text2)', marginTop: 8, fontSize: 14 }}>Find collaborators. Finish songs. Start bands.</p>
+          <button onClick={() => router.push('/')} style={{ background: 'none', border: 'none', color: 'var(--text3)', fontSize: 13, cursor: 'pointer', marginTop: 8, padding: '4px 8px' }}>
+            ← Back to home
+          </button>
         </div>
 
         {/* Toggle */}
