@@ -55,7 +55,7 @@ export default function ProjectsPage() {
           <h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 4 }}>Projects</h2>
           <p style={{ color: 'var(--text2)', fontSize: 14 }}>Find open projects and offer your skills</p>
         </div>
-        <button className="btn btn-brand" onClick={() => router.push('/projects/new')}>+ New project</button>
+        <button className="btn btn-brand" onClick={() => user ? router.push('/projects/new') : router.push('/auth?mode=register')}>+ New project</button>
       </div>
 
       {/* Tabs */}
