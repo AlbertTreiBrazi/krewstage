@@ -167,17 +167,17 @@ export default function LandingPage() {
             </div>
 
             {/* Projects — 3 coloane mari ca Image 2 */}
-            <div style={{ padding: '12px 11px', borderRight: '1px solid #1e1e1e' }}>
+            <div style={{ padding: '12px 11px', borderRight: '1px solid #1e1e1e', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'center' }}>
                 <span style={{ fontSize: 13, fontWeight: 700, color: '#f0f0f0' }}>Recommended Projects</span>
                 <span onClick={() => router.push('/projects')} style={{ fontSize: 9, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all projects →</span>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, flex: 1 }}>
                 {DEMO_PROJECTS.map((p, i) => (
-                  <div key={i} onClick={() => router.push('/projects')} style={{ background: '#1c1c1c', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', cursor: 'pointer' }}>
-                    {/* Image large */}
-                    <div style={{ position: 'relative', height: 140, overflow: 'hidden', background: '#111' }}>
-                      <img src={p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <div key={i} onClick={() => router.push('/projects')} style={{ background: '#1c1c1c', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}>
+                    {/* Image — flex: 1 umplu spatiul ramas */}
+                    <div style={{ position: 'relative', flex: 1, minHeight: 120, overflow: 'hidden', background: '#111' }}>
+                      <img src={p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'absolute', inset: 0 }} />
                       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 60%)' }} />
                       {p.hasAudio && (
                         <div style={{ position: 'absolute', bottom: 6, left: 6, right: 6, background: 'rgba(0,0,0,0.75)', borderRadius: 100, padding: '2px 7px', fontSize: 8, color: '#ccc', display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -185,8 +185,8 @@ export default function LandingPage() {
                         </div>
                       )}
                     </div>
-                    {/* Content */}
-                    <div style={{ padding: '10px 12px' }}>
+                    {/* Content — fixed height jos */}
+                    <div style={{ padding: '10px 12px', flexShrink: 0 }}>
                       <div style={{ fontSize: 12, fontWeight: 700, lineHeight: 1.3, marginBottom: 7, color: '#eee' }}>{p.title}</div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 5 }}>
                         <span style={{ fontSize: 10, color: '#666' }}>Looking for:</span>
