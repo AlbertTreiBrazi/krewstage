@@ -15,7 +15,7 @@ const DEMO_PROJECTS = [
   },
   {
     title: 'Guitarist & drummer for alt rock band',
-    image: 'https://images.unsplash.com/photo-1501386761578-eaa54b45c3ca?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80',
     role: 'Guitarist, Drummer', roleColor: '#fb923c', roleBg: 'rgba(251,146,60,0.18)',
     location: 'Austin, TX',
     avs: ['#10b981','#f472b6','#3b82f6','#fbbf24'],
@@ -106,20 +106,20 @@ export default function LandingPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: 28, padding: '40px 40px 20px', maxWidth: 1320, margin: '0 auto', alignItems: 'stretch' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 24, padding: '32px 40px 16px', maxWidth: 1320, margin: '0 auto', alignItems: 'stretch' }}>
 
         {/* Left copy */}
         <div style={{ paddingTop: 8, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h1 style={{ fontFamily: 'Syne, system-ui', fontSize: 42, fontWeight: 800, lineHeight: 1.08, letterSpacing: '-1.5px', marginBottom: 16, color: '#fff' }}>
+          <h1 style={{ fontFamily: 'Syne, system-ui', fontSize: 34, fontWeight: 800, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 12, color: '#fff' }}>
             Find your music crew.<br />
             Build songs.<br />
             <span style={{ color: '#ff6b35' }}>Reach the stage.</span>
           </h1>
-          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.65, marginBottom: 24, maxWidth: 320 }}>
-            KrewStage connects songwriters, musicians, producers, bands, and venues through real music projects — from demos and unfinished songs to collaborations, bands, and live opportunities.
+          <p style={{ fontSize: 13, color: '#888', lineHeight: 1.65, marginBottom: 18, maxWidth: 280 }}>
+            KrewStage connects musicians, producers, bands, and venues through real music projects.
           </p>
-          <div style={{ display: 'flex', gap: 12, marginBottom: 22 }}>
-            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '11px 24px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '9px 20px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
             <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '11px 24px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -136,7 +136,7 @@ export default function LandingPage() {
 
         {/* Right — Dashboard mockup exacta ca Image 2 */}
         <div style={{ background: '#141414', border: '1px solid #1e1e1e', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.5)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '175px 1fr 215px', minHeight: 290 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '155px 1fr 195px', minHeight: 260 }}>
 
             {/* Sidebar */}
             <div style={{ borderRight: '1px solid #1e1e1e', padding: '14px 12px', display: 'flex', flexDirection: 'column' }}>
@@ -166,7 +166,7 @@ export default function LandingPage() {
             </div>
 
             {/* Projects — 3 coloane mari ca Image 2 */}
-            <div style={{ padding: '14px 14px', borderRight: '1px solid #1e1e1e' }}>
+            <div style={{ padding: '12px 11px', borderRight: '1px solid #1e1e1e' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, alignItems: 'center' }}>
                 <span style={{ fontSize: 13, fontWeight: 700, color: '#f0f0f0' }}>Recommended Projects</span>
                 <span onClick={() => router.push('/projects')} style={{ fontSize: 9, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all projects →</span>
@@ -175,7 +175,7 @@ export default function LandingPage() {
                 {DEMO_PROJECTS.map((p, i) => (
                   <div key={i} onClick={() => router.push('/projects')} style={{ background: '#1c1c1c', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', cursor: 'pointer' }}>
                     {/* Image large */}
-                    <div style={{ position: 'relative', height: 100, overflow: 'hidden', background: '#111' }}>
+                    <div style={{ position: 'relative', height: 80, overflow: 'hidden', background: '#111' }}>
                       <img src={p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 60%)' }} />
                       {p.hasAudio && (
