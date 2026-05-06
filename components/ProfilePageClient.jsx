@@ -12,7 +12,7 @@ import AudioPlayer from './AudioPlayer'
 
 export default function ProfilePageClient({ userId }) {
   // userId passed as prop
-  const { user, profile: myProfile } = useAuth()
+  const { user, profile: myProfile, loading: authLoading } = useAuth()
   const router = useRouter()
   const [profile, setProfile] = useState(null)
   const [videos, setVideos] = useState([])
@@ -30,6 +30,11 @@ export default function ProfilePageClient({ userId }) {
   const isOwn = !userId || userId === user?.id
   const targetId = isOwn ? user?.id : userId
   const { isFollowing, loading: followLoading, toggleFollow } = useFollow(user?.id, isOwn ? null : targetId, myProfile?.full_name)
+
+  // Daca e propriul profil si nu e logat, redirect la /auth
+  useEffect(() => {
+    if (isOwn && !user && !authLoading) router.push('/auth?mode=register')
+  }, [isOwn, user, authLoading])
 
   useEffect(() => {
     if (targetId) { fetchProfile(targetId); fetchVideos(targetId); fetchAudio(targetId); fetchProjects(targetId) }
