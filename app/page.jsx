@@ -135,8 +135,8 @@ export default function LandingPage() {
         </div>
 
         {/* Right — Dashboard mockup exacta ca Image 2 */}
-        <div style={{ background: '#141414', border: '1px solid #1e1e1e', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.5)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr 190px', minHeight: 300 }}>
+        <div style={{ background: '#141414', border: '1px solid #1e1e1e', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr 190px', flex: 1 }}>
 
             {/* Sidebar */}
             <div style={{ borderRight: '1px solid #1e1e1e', padding: '14px 12px', display: 'flex', flexDirection: 'column' }}>
@@ -235,7 +235,187 @@ export default function LandingPage() {
       </div>
 
       {/* ── MIDDLE GRID: 4 panels ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.55fr 1.4fr', gap: 14, padding: '4px 40px 22px', maxWidth: 1280, margin: '0 auto' }}>
+      <div id="how" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.6fr 1.5fr', gap: 12, padding: '4px 40px 16px', maxWidth: 1280, margin: '0 auto' }}>
+
+        {/* 1. How It Works */}
+        <div style={s.panel}>
+          <div style={{ ...s.sectionLabel, marginBottom: 18 }}>1. How It Works</div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+            {[
+              { ic: '📝', label: 'Post or explore', desc: 'Share a project or search for opportunities' },
+              { ic: '👥', label: 'Connect', desc: 'Find vocalists, producers, instrumentalists, lyricists, engineers, bands, and venues.' },
+              { ic: '🎵', label: 'Create', desc: 'Collaborate and turn the project into a finished song or live-ready act.' },
+              { ic: '🎤', label: 'Reach the stage', desc: 'Start bands, discover live opportunities, and connect with venues.' },
+            ].map((step, i) => (
+              <div key={step.ic} style={{ display: 'flex', alignItems: 'flex-start', gap: 4, flex: 1 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: '50%', border: '2px solid #ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, flexShrink: 0 }}>
+                    <span style={{ fontSize: 17 }}>{step.ic}</span>
+                  </div>
+                  <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 4, textAlign: 'center' }}>{step.label}</div>
+                  <div style={{ fontSize: 10, color: '#555', lineHeight: 1.4, textAlign: 'center' }}>{step.desc}</div>
+                </div>
+                {i < 3 && <div style={{ color: '#2a2a2a', fontSize: 18, marginTop: 10, flexShrink: 0, padding: '0 2px' }}>→</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 2. Why KrewStage */}
+        <div style={s.panel}>
+          <div style={{ ...s.sectionLabel, marginBottom: 16 }}>2. Why KrewStage exists</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {[
+              { ic: '👥', t: 'Talented musicians are isolated', d: "Producers have beats but no vocalist. Lyricists have words but no melody. Musicians want bands but do not know how to find serious collaborators." },
+              { ic: '✕', t: 'Music projects stay unfinished', d: "Great ideas often never become real songs because the right collaborators, structure, and communication are missing." },
+            ].map(s2 => (
+              <div key={s2.t} style={{ display: 'flex', gap: 11 }}>
+                <div style={{ width: 36, height: 36, borderRadius: 9, background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>{s2.ic}</div>
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 4 }}>{s2.t}</div>
+                  <div style={{ fontSize: 10, color: '#555', lineHeight: 1.5 }}>{s2.d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 3. Featured Projects */}
+        <div style={s.panel}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <div style={s.sectionLabel}>3. Featured Projects</div>
+            <span onClick={() => router.push('/projects')} style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 6 }}>
+            {[
+              { genre: 'POP',        label: 'Vocalist', title: 'Pop Ballad — Vocals Collab',      loc: 'Remote',       c: '#f472b6', img: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=300&q=70' },
+              { genre: 'FUNK',       label: 'Drummer',  title: 'Drummer Needed for Funk Project', loc: 'Seattle, WA',  c: '#c084fc', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=300&q=70' },
+              { genre: 'LO-FI',      label: 'Producer', title: 'Lo-Fi Producer Open to Collab',  loc: 'Remote',       c: '#4ade80', img: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=300&q=70' },
+              { genre: 'LIVE EVENT', label: 'Venue',    title: 'Indie Night at The Hollow',      loc: 'Brooklyn, NY', c: '#fbbf24', img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=300&q=70' },
+              { genre: 'COUNTRY',    label: 'Band',     title: 'Country Songwriter Seeking Band', loc: 'Nashville',    c: '#fb923c', img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&q=70' },
+            ].map(p => (
+              <div key={p.title} onClick={() => router.push('/projects')} style={{ background: '#181818', border: '1px solid #222', borderRadius: 8, overflow: 'hidden', cursor: 'pointer' }}>
+                <div style={{ height: 72, position: 'relative', overflow: 'hidden' }}>
+                  <img src={p.img} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.75),transparent 55%)' }} />
+                  <div style={{ position: 'absolute', top: 4, left: 5 }}>
+                    <span style={{ fontSize: 7, padding: '1px 5px', borderRadius: 3, background: 'rgba(0,0,0,0.7)', color: '#fff', fontWeight: 700, letterSpacing: '0.04em' }}>{p.genre}</span>
+                  </div>
+                  <div style={{ position: 'absolute', bottom: 4, left: 5 }}>
+                    <span style={{ fontSize: 8, padding: '1px 6px', borderRadius: 100, background: `${p.c}30`, color: p.c, border: `1px solid ${p.c}50`, fontWeight: 700 }}>{p.label}</span>
+                  </div>
+                </div>
+                <div style={{ padding: '6px 7px' }}>
+                  <div style={{ fontSize: 9, fontWeight: 600, lineHeight: 1.3, color: '#ddd', marginBottom: 3 }}>{p.title}</div>
+                  <div style={{ fontSize: 8, color: '#555' }}>📍 {p.loc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 4. Find collaborators */}
+        <div style={s.panel}>
+          <div style={{ ...s.sectionLabel, marginBottom: 10 }}>4. Find the right collaborators</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 12 }}>
+            {ROLE_CHIPS.map(r => (
+              <button key={r} onClick={() => router.push(`/discover?role=${r.toLowerCase()}`)} style={s.pill(activeRole === r)} onMouseEnter={() => setActiveRole(r)} onMouseLeave={() => setActiveRole('Vocalist')}>{r}</button>
+            ))}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7 }}>
+            {DEMO_MEMBERS.map(m => (
+              <div key={m.name} onClick={() => router.push('/discover')} style={{ background: '#181818', border: '1px solid #222', borderRadius: 10, padding: '10px 9px', cursor: 'pointer' }}>
+                <img src={dicebear(m.seed)} alt={m.name} style={{ width: 36, height: 36, borderRadius: '50%', marginBottom: 6, background: '#1a1a1a' }} />
+                <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 1 }}>{m.name}</div>
+                <div style={{ fontSize: 10, color: '#ff6b35', marginBottom: 3, fontWeight: 500 }}>{m.role}</div>
+                <div style={{ fontSize: 9, color: '#555', lineHeight: 1.3, marginBottom: 3 }}>{m.genres}</div>
+                <div style={{ fontSize: 9, color: '#555', marginBottom: 6 }}>📍 {m.city}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
+                  <span style={{ fontSize: 9, color: '#4ade80', fontWeight: 500 }}>Open to Collab</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── BOTTOM: Features + Venues + CTA ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 240px 300px', gap: 12, padding: '0 40px 32px', maxWidth: 1280, margin: '0 auto' }}>
+
+        {/* 5. Features */}
+        <div style={s.panel}>
+          <div style={{ ...s.sectionLabel, marginBottom: 16 }}>5. Features built for musicians</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6,1fr)', gap: 12 }}>
+            {FEATURES.map(f => (
+              <div key={f.title} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 6 }}>
+                <div style={{ width: 36, height: 36, borderRadius: 9, background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>{f.icon}</div>
+                <div style={{ fontSize: 11, fontWeight: 700 }}>{f.title}</div>
+                <div style={{ fontSize: 10, color: '#555', lineHeight: 1.4 }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Venues banner */}
+        <div onClick={() => router.push('/venues')} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 14, padding: '18px 16px', cursor: 'pointer', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&q=60)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.2 }} />
+          <div style={{ position: 'relative' }}>
+            <div style={{ fontSize: 14, fontWeight: 800, marginBottom: 8, lineHeight: 1.3, fontFamily: 'Syne,system-ui' }}>For venues and organizers</div>
+            <div style={{ fontSize: 11, color: '#888', marginBottom: 16, lineHeight: 1.5 }}>Find artists, bands, and live-ready projects for your next event.</div>
+            <button style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '8px 16px', fontSize: 12, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Discover Artists</button>
+          </div>
+        </div>
+
+        {/* CTA box */}
+        <div style={{ background: '#111', border: '1px solid #2a2a2a', borderRadius: 14, padding: '22px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ fontSize: 20, fontWeight: 900, lineHeight: 1.2, marginBottom: 6, letterSpacing: '-0.5px', fontFamily: 'Syne,system-ui' }}>
+            Your next song starts with the <span style={{ color: '#ff6b35' }}>right crew.</span>
+          </div>
+          <div style={{ fontSize: 12, color: '#666', marginBottom: 18, lineHeight: 1.5 }}>Join KrewStage and connect with creators, collaborators, bands, and venues worldwide.</div>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '10px 18px', fontSize: 13, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
+            <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '10px 18px', fontSize: 13, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
+          </div>
+        </div>
+      </div>
+
+      {/* ── FOOTER ── */}
+      <div style={{ borderTop: '1px solid #1a1a1a', padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, maxWidth: 1280, margin: '0 auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: '#ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>🎤</div>
+          <div>
+            <div style={{ fontSize: 15 }}><span style={s.brandLogo}>Krew</span><span style={s.brandLogoOrange}>Stage</span></div>
+            <div style={{ fontSize: 11, color: '#555', marginTop: 1 }}>Find your music crew. Build songs. <span style={{ color: '#ff6b35' }}>Reach the stage.</span></div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 18, color: '#555' }}>
+          {[
+            { href: 'https://instagram.com/krewstage', svg: <IG /> },
+            { href: 'https://tiktok.com/@krewstage', svg: <TT /> },
+            { href: 'https://youtube.com/@krewstage', svg: <YT /> },
+            { href: 'https://discord.gg/krewstage', svg: <DC /> },
+            { href: 'https://x.com/krewstage', svg: <X /> },
+          ].map((s2, i) => (
+            <a key={i} href={s2.href} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', display: 'flex' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#ff6b35'}
+              onMouseLeave={e => e.currentTarget.style.color = '#555'}>
+              {s2.svg}
+            </a>
+          ))}
+        </div>
+        <div style={{ display: 'flex', gap: 20 }}>
+          {['About','Blog','Help Center','Terms','Privacy'].map(l => (
+            <span key={l} onClick={() => router.push('/auth')} style={{ fontSize: 12, color: '#555', cursor: 'pointer' }}
+              onMouseEnter={e => e.target.style.color = '#f0f0f0'}
+              onMouseLeave={e => e.target.style.color = '#555'}>
+              {l}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
 
         {/* 1. How It Works */}
         <div style={s.panel}>
