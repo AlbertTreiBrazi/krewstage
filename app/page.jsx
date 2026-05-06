@@ -106,26 +106,26 @@ export default function LandingPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 24, padding: '32px 40px 16px', maxWidth: 1320, margin: '0 auto', alignItems: 'stretch' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '360px 1fr', gap: 28, padding: '36px 40px 20px', maxWidth: 1320, margin: '0 auto', alignItems: 'stretch' }}>
 
         {/* Left copy */}
-        <div style={{ paddingTop: 8, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h1 style={{ fontFamily: 'Syne, system-ui', fontSize: 34, fontWeight: 800, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 12, color: '#fff' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h1 style={{ fontFamily: 'Syne, system-ui', fontSize: 40, fontWeight: 800, lineHeight: 1.08, letterSpacing: '-1.2px', marginBottom: 14, color: '#fff' }}>
             Find your music crew.<br />
             Build songs.<br />
             <span style={{ color: '#ff6b35' }}>Reach the stage.</span>
           </h1>
-          <p style={{ fontSize: 13, color: '#888', lineHeight: 1.65, marginBottom: 18, maxWidth: 280 }}>
-            KrewStage connects musicians, producers, bands, and venues through real music projects.
+          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.65, marginBottom: 22, maxWidth: 340 }}>
+            KrewStage connects songwriters, musicians, producers, bands, and venues through real music projects — from demos and unfinished songs to collaborations, bands, and live opportunities.
           </p>
-          <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
-            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '9px 20px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 20 }}>
+            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '11px 24px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
             <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '11px 24px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ display: 'flex' }}>
-              {['#ff6b35','#a855f7','#3b82f6','#10b981'].map((c, i) => (
-                <div key={i} style={{ width: 28, height: 28, borderRadius: '50%', background: c, border: '2px solid #0d0d0d', marginLeft: i > 0 ? -8 : 0 }} />
+              {['maya-vocalist','ethan-producer','zoe-vocalist','alex-guitarist'].map((seed, i) => (
+                <img key={i} src={dicebear(seed)} alt="" style={{ width: 30, height: 30, borderRadius: '50%', border: '2px solid #0d0d0d', marginLeft: i > 0 ? -9 : 0, background: '#1a1a1a' }} />
               ))}
             </div>
             <div style={{ fontSize: 12, color: '#666', lineHeight: 1.5 }}>
