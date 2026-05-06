@@ -209,26 +209,28 @@ export default function LandingPage() {
             </div>
 
             {/* Messages */}
-            <div style={{ padding: '14px 13px' }}>
+            <div style={{ padding: '14px 13px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14, alignItems: 'center' }}>
                 <span style={{ fontSize: 13, fontWeight: 700, color: '#f0f0f0' }}>Messages</span>
                 <span onClick={() => router.push('/auth?mode=register')} style={{ fontSize: 9, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
               </div>
-              {DEMO_MESSAGES.map(m => (
-                <div key={m.name} style={{ display: 'flex', gap: 9, marginBottom: 12, paddingBottom: 12, borderBottom: '1px solid #1e1e1e' }}>
-                  <img src={dicebear(m.seed)} alt={m.name} style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, background: '#1a1a1a' }} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: '#f0f0f0' }}>{m.name}</span>
-                      <span style={{ fontSize: 9, color: '#555' }}>{m.time}</span>
+              <div style={{ flex: 1 }}>
+                {DEMO_MESSAGES.map(m => (
+                  <div key={m.name} style={{ display: 'flex', gap: 9, marginBottom: 14, paddingBottom: 14, borderBottom: '1px solid #1e1e1e' }}>
+                    <img src={dicebear(m.seed)} alt={m.name} style={{ width: 36, height: 36, borderRadius: '50%', flexShrink: 0, background: '#1a1a1a' }} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: '#f0f0f0' }}>{m.name}</span>
+                        <span style={{ fontSize: 9, color: '#555' }}>{m.time}</span>
+                      </div>
+                      <div style={{ fontSize: 11, color: '#777', lineHeight: 1.4, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{m.msg}</div>
                     </div>
-                    <div style={{ fontSize: 10, color: '#777', lineHeight: 1.4, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{m.msg}</div>
+                    {m.unread && <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#ff6b35', marginTop: 4, flexShrink: 0 }} />}
                   </div>
-                  {m.unread && <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#ff6b35', marginTop: 4, flexShrink: 0 }} />}
-                </div>
-              ))}
-              <div style={{ textAlign: 'center', marginTop: 6 }}>
-                <span onClick={() => router.push('/auth?mode=register')} style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>Go to Messages →</span>
+                ))}
+              </div>
+              <div style={{ textAlign: 'center', marginTop: 'auto', paddingTop: 10 }}>
+                <span onClick={() => router.push('/auth?mode=register')} style={{ fontSize: 11, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>Go to Messages →</span>
               </div>
             </div>
           </div>
