@@ -235,27 +235,27 @@ export default function LandingPage() {
       </div>
 
       {/* ── MIDDLE GRID: 4 panels ── */}
-      <div id="how" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.6fr 1.5fr', gap: 12, padding: '4px 40px 16px', maxWidth: 1280, margin: '0 auto' }}>
+      <div id="how" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.9fr 1.5fr 1.4fr', gap: 10, padding: '4px 40px 14px', maxWidth: 1400, margin: '0 auto' }}>
 
         {/* 1. How It Works */}
         <div style={s.panel}>
-          <div style={{ ...s.sectionLabel, marginBottom: 18 }}>1. How It Works</div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <div style={{ ...s.sectionLabel, marginBottom: 14 }}>1. How It Works</div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 0 }}>
             {[
-              { ic: '📝', label: 'Post or explore', desc: 'Share a project or search for opportunities' },
+              { ic: '📝', label: 'Post or explore', desc: 'Share a demo, lyrics, beat, unfinished song, open band role, or live opportunity.' },
               { ic: '👥', label: 'Connect', desc: 'Find vocalists, producers, instrumentalists, lyricists, engineers, bands, and venues.' },
               { ic: '🎵', label: 'Create', desc: 'Collaborate and turn the project into a finished song or live-ready act.' },
               { ic: '🎤', label: 'Reach the stage', desc: 'Start bands, discover live opportunities, and connect with venues.' },
             ].map((step, i) => (
-              <div key={step.ic} style={{ display: 'flex', alignItems: 'flex-start', gap: 4, flex: 1 }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: '50%', border: '2px solid #ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, flexShrink: 0 }}>
-                    <span style={{ fontSize: 17 }}>{step.ic}</span>
+              <div key={step.ic} style={{ display: 'flex', alignItems: 'flex-start', flex: 1 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, minWidth: 0 }}>
+                  <div style={{ width: 34, height: 34, borderRadius: '50%', border: '2px solid #ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 7, flexShrink: 0 }}>
+                    <span style={{ fontSize: 15 }}>{step.ic}</span>
                   </div>
-                  <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 4, textAlign: 'center' }}>{step.label}</div>
-                  <div style={{ fontSize: 10, color: '#555', lineHeight: 1.4, textAlign: 'center' }}>{step.desc}</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, marginBottom: 3, textAlign: 'center' }}>{step.label}</div>
+                  <div style={{ fontSize: 9, color: '#555', lineHeight: 1.4, textAlign: 'center', padding: '0 2px' }}>{step.desc}</div>
                 </div>
-                {i < 3 && <div style={{ color: '#2a2a2a', fontSize: 18, marginTop: 10, flexShrink: 0, padding: '0 2px' }}>→</div>}
+                {i < 3 && <div style={{ color: '#2a2a2a', fontSize: 14, marginTop: 9, flexShrink: 0, padding: '0 1px' }}>→</div>}
               </div>
             ))}
           </div>
@@ -263,17 +263,17 @@ export default function LandingPage() {
 
         {/* 2. Why KrewStage */}
         <div style={s.panel}>
-          <div style={{ ...s.sectionLabel, marginBottom: 16 }}>2. Why KrewStage exists</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ ...s.sectionLabel, marginBottom: 12 }}>2. Why KrewStage exists</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {[
-              { ic: '👥', t: 'Talented musicians are isolated', d: "Producers have beats but no vocalist. Lyricists have words but no melody. Musicians want bands but do not know how to find serious collaborators." },
-              { ic: '✕', t: 'Music projects stay unfinished', d: "Great ideas often never become real songs because the right collaborators, structure, and communication are missing." },
+              { ic: '👥', t: 'Talented musicians are isolated', d: 'Producers have beats but no vocalist. Lyricists have words but no melody. Musicians want bands but do not know how to find serious collaborators.' },
+              { ic: '✕', t: 'Music projects stay unfinished', d: 'Great ideas often never become real songs because the right collaborators, structure, and communication are missing.' },
             ].map(s2 => (
-              <div key={s2.t} style={{ display: 'flex', gap: 11 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 9, background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>{s2.ic}</div>
+              <div key={s2.t} style={{ display: 'flex', gap: 9 }}>
+                <div style={{ width: 30, height: 30, borderRadius: 7, background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, flexShrink: 0 }}>{s2.ic}</div>
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 4 }}>{s2.t}</div>
-                  <div style={{ fontSize: 10, color: '#555', lineHeight: 1.5 }}>{s2.d}</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, marginBottom: 3, lineHeight: 1.3 }}>{s2.t}</div>
+                  <div style={{ fontSize: 9, color: '#555', lineHeight: 1.4 }}>{s2.d}</div>
                 </div>
               </div>
             ))}
@@ -282,32 +282,32 @@ export default function LandingPage() {
 
         {/* 3. Featured Projects */}
         <div style={s.panel}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
             <div style={s.sectionLabel}>3. Featured Projects</div>
-            <span onClick={() => router.push('/projects')} style={{ fontSize: 10, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
+            <span onClick={() => router.push('/projects')} style={{ fontSize: 9, color: '#ff6b35', cursor: 'pointer', fontWeight: 600 }}>View all</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 6 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 5 }}>
             {[
-              { genre: 'POP',        label: 'Vocalist', title: 'Pop Ballad — Vocals Collab',      loc: 'Remote',       c: '#f472b6', img: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=300&q=70' },
-              { genre: 'FUNK',       label: 'Drummer',  title: 'Drummer Needed for Funk Project', loc: 'Seattle, WA',  c: '#c084fc', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=300&q=70' },
-              { genre: 'LO-FI',      label: 'Producer', title: 'Lo-Fi Producer Open to Collab',  loc: 'Remote',       c: '#4ade80', img: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=300&q=70' },
-              { genre: 'LIVE EVENT', label: 'Venue',    title: 'Indie Night at The Hollow',      loc: 'Brooklyn, NY', c: '#fbbf24', img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=300&q=70' },
-              { genre: 'COUNTRY',    label: 'Band',     title: 'Country Songwriter Seeking Band', loc: 'Nashville',    c: '#fb923c', img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&q=70' },
+              { genre: 'POP',        label: 'Vocalist', title: 'Pop Ballad — Vocals Collab',       loc: 'Remote',       c: '#f472b6', img: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=300&q=70' },
+              { genre: 'FUNK',       label: 'Drummer',  title: 'Drummer Needed for Funk Project',  loc: 'Seattle, WA',  c: '#c084fc', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=300&q=70' },
+              { genre: 'LO-FI',      label: 'Producer', title: 'Lo-Fi Producer Open to Collab',   loc: 'Remote',       c: '#4ade80', img: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=300&q=70' },
+              { genre: 'LIVE EVENT', label: 'Venue',    title: 'Indie Night at The Hollow',       loc: 'Brooklyn, NY', c: '#fbbf24', img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=300&q=70' },
+              { genre: 'COUNTRY',    label: 'Band',     title: 'Country Songwriter Seeking Band',  loc: 'Nashville',    c: '#fb923c', img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&q=70' },
             ].map(p => (
-              <div key={p.title} onClick={() => router.push('/projects')} style={{ background: '#181818', border: '1px solid #222', borderRadius: 8, overflow: 'hidden', cursor: 'pointer' }}>
-                <div style={{ height: 72, position: 'relative', overflow: 'hidden' }}>
+              <div key={p.title} onClick={() => router.push('/projects')} style={{ background: '#181818', border: '1px solid #222', borderRadius: 7, overflow: 'hidden', cursor: 'pointer' }}>
+                <div style={{ height: 80, position: 'relative', overflow: 'hidden' }}>
                   <img src={p.img} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.75),transparent 55%)' }} />
-                  <div style={{ position: 'absolute', top: 4, left: 5 }}>
-                    <span style={{ fontSize: 7, padding: '1px 5px', borderRadius: 3, background: 'rgba(0,0,0,0.7)', color: '#fff', fontWeight: 700, letterSpacing: '0.04em' }}>{p.genre}</span>
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.8),transparent 50%)' }} />
+                  <div style={{ position: 'absolute', top: 3, left: 4 }}>
+                    <span style={{ fontSize: 6, padding: '1px 4px', borderRadius: 2, background: 'rgba(0,0,0,0.75)', color: '#fff', fontWeight: 700, letterSpacing: '0.04em' }}>{p.genre}</span>
                   </div>
-                  <div style={{ position: 'absolute', bottom: 4, left: 5 }}>
-                    <span style={{ fontSize: 8, padding: '1px 6px', borderRadius: 100, background: `${p.c}30`, color: p.c, border: `1px solid ${p.c}50`, fontWeight: 700 }}>{p.label}</span>
+                  <div style={{ position: 'absolute', bottom: 4, left: 4 }}>
+                    <span style={{ fontSize: 7, padding: '1px 5px', borderRadius: 100, background: `${p.c}35`, color: p.c, border: `1px solid ${p.c}55`, fontWeight: 700 }}>{p.label}</span>
                   </div>
                 </div>
-                <div style={{ padding: '6px 7px' }}>
-                  <div style={{ fontSize: 9, fontWeight: 600, lineHeight: 1.3, color: '#ddd', marginBottom: 3 }}>{p.title}</div>
-                  <div style={{ fontSize: 8, color: '#555' }}>📍 {p.loc}</div>
+                <div style={{ padding: '5px 6px' }}>
+                  <div style={{ fontSize: 8, fontWeight: 600, lineHeight: 1.3, color: '#ddd', marginBottom: 2 }}>{p.title}</div>
+                  <div style={{ fontSize: 7, color: '#555' }}>📍 {p.loc}</div>
                 </div>
               </div>
             ))}
@@ -316,28 +316,29 @@ export default function LandingPage() {
 
         {/* 4. Find collaborators */}
         <div style={s.panel}>
-          <div style={{ ...s.sectionLabel, marginBottom: 10 }}>4. Find the right collaborators</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 12 }}>
+          <div style={{ ...s.sectionLabel, marginBottom: 9 }}>4. Find the right collaborators</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 10 }}>
             {ROLE_CHIPS.map(r => (
               <button key={r} onClick={() => router.push(`/discover?role=${r.toLowerCase()}`)} style={s.pill(activeRole === r)} onMouseEnter={() => setActiveRole(r)} onMouseLeave={() => setActiveRole('Vocalist')}>{r}</button>
             ))}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 6 }}>
             {DEMO_MEMBERS.map(m => (
-              <div key={m.name} onClick={() => router.push('/discover')} style={{ background: '#181818', border: '1px solid #222', borderRadius: 10, padding: '10px 9px', cursor: 'pointer' }}>
-                <img src={dicebear(m.seed)} alt={m.name} style={{ width: 36, height: 36, borderRadius: '50%', marginBottom: 6, background: '#1a1a1a' }} />
-                <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 1 }}>{m.name}</div>
-                <div style={{ fontSize: 10, color: '#ff6b35', marginBottom: 3, fontWeight: 500 }}>{m.role}</div>
-                <div style={{ fontSize: 9, color: '#555', lineHeight: 1.3, marginBottom: 3 }}>{m.genres}</div>
-                <div style={{ fontSize: 9, color: '#555', marginBottom: 6 }}>📍 {m.city}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
-                  <span style={{ fontSize: 9, color: '#4ade80', fontWeight: 500 }}>Open to Collab</span>
+              <div key={m.name} onClick={() => router.push('/discover')} style={{ background: '#181818', border: '1px solid #222', borderRadius: 9, padding: '9px 8px', cursor: 'pointer' }}>
+                <img src={dicebear(m.seed)} alt={m.name} style={{ width: 32, height: 32, borderRadius: '50%', marginBottom: 5, background: '#1a1a1a' }} />
+                <div style={{ fontSize: 10, fontWeight: 700, marginBottom: 1 }}>{m.name}</div>
+                <div style={{ fontSize: 9, color: '#ff6b35', marginBottom: 2, fontWeight: 500 }}>{m.role}</div>
+                <div style={{ fontSize: 8, color: '#555', lineHeight: 1.3, marginBottom: 2 }}>{m.genres}</div>
+                <div style={{ fontSize: 8, color: '#555', marginBottom: 5 }}>📍 {m.city}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                  <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#22c55e' }} />
+                  <span style={{ fontSize: 8, color: '#4ade80', fontWeight: 500 }}>Open to Collab</span>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
       </div>
 
       {/* ── BOTTOM: Features + Venues + CTA ── */}
