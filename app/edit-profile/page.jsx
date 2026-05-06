@@ -40,6 +40,7 @@ export default function EditProfilePage() {
         venue_capacity: profile?.venue_capacity || null,
         venue_website: profile?.venue_website || '',
         social_instagram: profile?.social_instagram || '',
+        social_youtube: profile?.social_youtube || '',
         social_soundcloud: profile?.social_soundcloud || '',
         social_spotify: profile?.social_spotify || '',
         social_tiktok: profile?.social_tiktok || '',
