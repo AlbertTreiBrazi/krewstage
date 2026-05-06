@@ -95,21 +95,24 @@ export default function LandingPage() {
     <div style={{ background: '#0d0d0d', color: '#f0f0f0', minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
 
       {/* ── NAV ── */}
-      <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 40px', borderBottom: '1px solid #1a1a1a', background: 'rgba(13,13,13,0.97)', position: 'sticky', top: 0, zIndex: 100, backdropFilter: 'blur(20px)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 40px', borderBottom: '1px solid #1e1e1e', background: '#0d0d0d', position: 'sticky', top: 0, zIndex: 100, backdropFilter: 'blur(20px)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <div style={{ width: 30, height: 30, borderRadius: 8, background: '#ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15 }}>🎤</div>
           <span style={{ fontSize: 19 }}>
             <span style={s.brandLogo}>Krew</span><span style={s.brandLogoOrange}>Stage</span>
           </span>
         </div>
-        <div style={{ display: 'flex', gap: 32 }}>
+        <div className="nav-links" style={{ display: 'flex', gap: 28 }}>
           {[{l:'Explore Projects',p:'/projects'},{l:'Find Members',p:'/discover'},{l:'How It Works',p:'#how'},{l:'For Venues',p:'/venues'}].map(item => (
-            <span key={item.l} onClick={() => item.p.startsWith('#') ? null : router.push(item.p)} style={{ fontSize: 14, color: '#999', cursor: 'pointer', fontWeight: 500 }}>{item.l}</span>
+            <span key={item.l} onClick={() => {
+              if (item.p === '#how') document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })
+              else router.push(item.p)
+            }} style={{ fontSize: 14, color: '#999', cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap' }}>{item.l}</span>
           ))}
         </div>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <button onClick={() => router.push('/auth')} style={{ background: 'transparent', border: 'none', padding: '8px 12px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Log In</button>
-          <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '9px 22px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Sign Up</button>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexShrink: 0 }}>
+          <button className="nav-cta-login" onClick={() => router.push('/auth')} style={{ background: 'transparent', border: 'none', padding: '8px 12px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Log In</button>
+          <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '9px 22px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer', whiteSpace: 'nowrap' }}>Sign Up</button>
         </div>
       </nav>
 
@@ -407,7 +410,8 @@ export default function LandingPage() {
       </div>
 
       {/* ── FOOTER ── */}
-      <div style={{ borderTop: '1px solid #1a1a1a', padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, maxWidth: 1400, margin: '0 auto' }}>
+      <div style={{ borderTop: '1px solid #1e1e1e', background: '#0d0d0d' }}>
+        <div className="footer" style={{ padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, maxWidth: 1400, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{ width: 26, height: 26, borderRadius: 7, background: '#ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>🎤</div>
           <div>
@@ -439,6 +443,7 @@ export default function LandingPage() {
             </span>
           ))}
         </div>
+      </div>
       </div>
     </div>
   )
