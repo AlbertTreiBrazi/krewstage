@@ -31,7 +31,7 @@ export default function BandsPage() {
         .limit(50)
       if (error) throw error
       setBands(data || [])
-      setMyBands((data || []).filter(b => b.owner_id === user.id || b.band_members?.some(m => m.user_id === user.id)))
+      setMyBands((data || []).filter(b => user?.id && (b.owner_id === user.id || b.band_members?.some(m => m.user_id === user.id))))
     } catch (err) {
       console.error('fetchBands error:', err)
       setBands([]); setMyBands([])
@@ -67,12 +67,12 @@ export default function BandsPage() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
           {displayed.map(band => (
-            <BandCard key={band.id} band={band} currentUserId={user.id} onClick={() => setSelectedBand(band)} onRefresh={fetchBands} />
+            <BandCard key={band.id} band={band} currentUserId={user?.id} onClick={() => setSelectedBand(band)} onRefresh={fetchBands} />
           ))}
         </div>
       )}
 
-      {showCreate && <CreateBandModal onClose={() => setShowCreate(false)} onCreated={() => { setShowCreate(false); fetchBands(); setTab('mine') }} userId={user.id} />}
+      {showCreate && <CreateBandModal onClose={() => setShowCreate(false)} onCreated={() => { setShowCreate(false); fetchBands(); setTab('mine') }} userId={user?.id} />}
       {selectedBand && <BandDetailModal band={selectedBand} currentUser={user} currentProfile={profile} onClose={() => setSelectedBand(null)} onRefresh={fetchBands} />}
     </div>
   )
