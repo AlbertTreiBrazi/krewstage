@@ -106,10 +106,10 @@ export default function LandingPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: 28, padding: '40px 40px 20px', maxWidth: 1320, margin: '0 auto', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: 28, padding: '40px 40px 20px', maxWidth: 1320, margin: '0 auto', alignItems: 'stretch' }}>
 
         {/* Left copy */}
-        <div style={{ paddingTop: 8 }}>
+        <div style={{ paddingTop: 8, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <h1 style={{ fontFamily: 'Syne, system-ui', fontSize: 42, fontWeight: 800, lineHeight: 1.08, letterSpacing: '-1.5px', marginBottom: 16, color: '#fff' }}>
             Find your music crew.<br />
             Build songs.<br />
@@ -239,29 +239,24 @@ export default function LandingPage() {
 
         {/* 1. How It Works */}
         <div style={s.panel}>
-          <div style={{ ...s.sectionLabel, marginBottom: 16 }}>1. How It Works</div>
-          {/* Horizontal flow with numbered circles and arrows */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: 16 }}>
-            {['1','2','3','4'].map((n, i) => (
-              <div key={n} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <div style={{ width: 28, height: 28, borderRadius: '50%', border: '2px solid #ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: '#ff6b35', flexShrink: 0 }}>{n}</div>
-                {i < 3 && <div style={{ color: '#333', fontSize: 12 }}>→</div>}
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ ...s.sectionLabel, marginBottom: 20 }}>1. How It Works</div>
+          {/* 4 steps horizontal with circles and arrows */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 4 }}>
             {[
-              ['Post or explore', 'Share a demo, lyrics, beat, unfinished song, open band role, or live opportunity.'],
-              ['Connect',         'Find vocalists, producers, instrumentalists, lyricists, engineers, bands, and venues.'],
-              ['Create',          'Collaborate and turn the project into a finished song or live-ready act.'],
-              ['Reach the stage', 'Start bands, discover live opportunities, and connect with venues.'],
-            ].map(([title, desc], i) => (
-              <div key={title} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#ff6b35', flexShrink: 0 }}>{i+1}</div>
-                <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 2 }}>{title}</div>
-                  <div style={{ fontSize: 10, color: '#555', lineHeight: 1.4 }}>{desc}</div>
+              { n: '1', ic: '📝', label: 'Post or explore',  desc: 'Share a project or search for opportunities' },
+              { n: '2', ic: '👥', label: 'Connect',           desc: 'Find vocalists, producers, instrumentalists, lyricists, engineers, bands, and venues.' },
+              { n: '3', ic: '🎵', label: 'Create',            desc: 'Collaborate and turn the project into a finished song or live-ready act.' },
+              { n: '4', ic: '🎤', label: 'Reach the stage',  desc: 'Start bands, discover live opportunities, and connect with venues.' },
+            ].map((step, i) => (
+              <div key={step.n} style={{ display: 'flex', alignItems: 'flex-start', gap: 4, flex: i < 3 ? '1 1 0' : '1 1 0' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 0, flex: 1 }}>
+                  <div style={{ width: 36, height: 36, borderRadius: '50%', border: '2px solid #ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, flexShrink: 0 }}>
+                    <span style={{ fontSize: 16 }}>{step.ic}</span>
+                  </div>
+                  <div style={{ fontSize: 11, fontWeight: 700, marginBottom: 4, textAlign: 'center' }}>{step.label}</div>
+                  <div style={{ fontSize: 10, color: '#555', lineHeight: 1.4, textAlign: 'center' }}>{step.desc}</div>
                 </div>
+                {i < 3 && <div style={{ color: '#333', fontSize: 16, marginTop: 10, flexShrink: 0, padding: '0 2px' }}>→</div>}
               </div>
             ))}
           </div>
@@ -296,17 +291,24 @@ export default function LandingPage() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 7 }}>
             {[
-              { label: 'Vocalist',  title: 'Need vocalist for indie pop track', loc: 'Remote',      ic: '🎤', c: '#f472b6' },
-              { label: 'Drummer',   title: 'Drummer wanted for funk project',   loc: 'Los Angeles', ic: '🥁', c: '#c084fc' },
-              { label: 'Producer',  title: 'Producer for hip hop EP',           loc: 'Remote',      ic: '🎛️', c: '#4ade80' },
-              { label: 'Venue',     title: 'Small venue looking for bands',     loc: 'Chicago',     ic: '🏛️', c: '#fbbf24' },
-              { label: 'Band',      title: 'Forming alt rock band',             loc: 'Seattle',     ic: '🎸', c: '#fb923c' },
+              { label: 'Vocalist', title: 'Need vocalist for indie pop track', loc: 'Remote',      c: '#f472b6', img: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=300&q=70' },
+              { label: 'Drummer',  title: 'Drummer wanted for funk project',   loc: 'Los Angeles', c: '#c084fc', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=300&q=70' },
+              { label: 'Producer', title: 'Producer for hip hop EP',           loc: 'Remote',      c: '#4ade80', img: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=300&q=70' },
+              { label: 'Venue',    title: 'Small venue looking for bands',     loc: 'Chicago',     c: '#fbbf24', img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=300&q=70' },
+              { label: 'Band',     title: 'Forming alt rock band',             loc: 'Seattle',     c: '#fb923c', img: 'https://images.unsplash.com/photo-1501386761578-eaa54b45c3ca?w=300&q=70' },
             ].map(p => (
-              <div key={p.title} style={{ background: '#181818', border: '1px solid #232323', borderRadius: 9, padding: '10px 8px', textAlign: 'center' }}>
-                <div style={{ width: 32, height: 32, borderRadius: '50%', background: `${p.c}1f`, border: `1px solid ${p.c}55`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, margin: '0 auto 6px' }}>{p.ic}</div>
-                <div style={{ fontSize: 9, padding: '2px 7px', borderRadius: 100, background: `${p.c}22`, color: p.c, border: `1px solid ${p.c}44`, marginBottom: 5, display: 'inline-block', fontWeight: 700 }}>{p.label}</div>
-                <div style={{ fontSize: 9, fontWeight: 600, lineHeight: 1.35, color: '#ddd', marginBottom: 5, minHeight: 24 }}>{p.title}</div>
-                <div style={{ fontSize: 8, color: '#666' }}>📍 {p.loc}</div>
+              <div key={p.title} onClick={() => router.push('/projects')} style={{ background: '#181818', border: '1px solid #232323', borderRadius: 9, overflow: 'hidden', cursor: 'pointer' }}>
+                <div style={{ height: 70, position: 'relative', overflow: 'hidden' }}>
+                  <img src={p.img} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%)' }} />
+                  <div style={{ position: 'absolute', bottom: 5, left: 6 }}>
+                    <span style={{ fontSize: 8, padding: '1px 6px', borderRadius: 100, background: `${p.c}33`, color: p.c, border: `1px solid ${p.c}55`, fontWeight: 700 }}>{p.label}</span>
+                  </div>
+                </div>
+                <div style={{ padding: '7px 8px' }}>
+                  <div style={{ fontSize: 9, fontWeight: 600, lineHeight: 1.35, color: '#ddd', marginBottom: 4 }}>{p.title}</div>
+                  <div style={{ fontSize: 8, color: '#666' }}>📍 {p.loc}</div>
+                </div>
               </div>
             ))}
           </div>
