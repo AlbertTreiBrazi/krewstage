@@ -163,7 +163,7 @@ label { font-size: 13px; color: var(--text2); display: block; margin-bottom: 6px
 .role-engineer { background: rgba(107,114,128,0.12); color: #9ca3af; border: 1px solid rgba(107,114,128,0.3); }
 .role-venue    { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
 
-@media (max-width: 640px) { .hide-mobile { display: none !important; } }
+@media (max-width: 640px) { .hide-mobile { display: none !important; } .show-mobile-flex { display: flex !important; } }
 
 /* ── RESPONSIVE — KrewStage ── */
 
