@@ -106,11 +106,11 @@ export default function LandingPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '360px 1fr', gap: 28, padding: '36px 40px 20px', maxWidth: 1320, margin: '0 auto', alignItems: 'stretch' }}>
+      <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '360px 1fr', gap: 28, padding: '36px 40px 20px', maxWidth: 1400, margin: '0 auto', alignItems: 'stretch' }}>
 
         {/* Left copy */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h1 style={{ fontFamily: 'Syne, system-ui', fontSize: 40, fontWeight: 800, lineHeight: 1.08, letterSpacing: '-1.2px', marginBottom: 14, color: '#fff' }}>
+          <h1 className="hero-h1" style={{ fontFamily: 'Syne, system-ui', fontSize: 40, fontWeight: 800, lineHeight: 1.08, letterSpacing: '-1.2px', marginBottom: 14, color: '#fff' }}>
             Find your music crew.<br />
             Build songs.<br />
             <span style={{ color: '#ff6b35' }}>Reach the stage.</span>
@@ -135,7 +135,8 @@ export default function LandingPage() {
         </div>
 
         {/* Right — Dashboard mockup exacta ca Image 2 */}
-        <div style={{ background: '#141414', border: '1px solid #1e1e1e', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column' }}>
+        
+        <div className="hero-mockup" style={{ background: '#141414', border: '1px solid #1e1e1e', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr 190px', flex: 1 }}>
 
             {/* Sidebar */}
@@ -235,7 +236,7 @@ export default function LandingPage() {
       </div>
 
       {/* ── RAND 1: How It Works | Why KrewStage | Featured Projects ── */}
-      <div id="how" style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr 1.8fr', gap: 12, padding: '4px 40px 12px', maxWidth: 1400, margin: '0 auto' }}>
+      <div id="how" className="middle-grid-3" style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr 1.8fr', gap: 12, padding: '4px 40px 12px', maxWidth: 1400, margin: '0 auto' }}>
 
         {/* 1. How It Works */}
         <div style={s.panel}>
@@ -299,7 +300,7 @@ export default function LandingPage() {
                   <img src={p.img} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.8),transparent 50%)' }} />
                   <div style={{ position: 'absolute', top: 4, left: 5 }}>
-                    <span style={{ fontSize: 7, padding: '1px 5px', borderRadius: 3, background: 'rgba(0,0,0,0.75)', color: '#fff', fontWeight: 700, letterSpacing: '0.04em' }}>{p.genre}</span>
+                    <span style={{ fontSize: 8, padding: '1px 5px', borderRadius: 3, background: 'rgba(0,0,0,0.75)', color: '#fff', fontWeight: 700, letterSpacing: '0.04em' }}>{p.genre}</span>
                   </div>
                   <div style={{ position: 'absolute', bottom: 5, left: 5 }}>
                     <span style={{ fontSize: 8, padding: '2px 6px', borderRadius: 100, background: `${p.c}35`, color: p.c, border: `1px solid ${p.c}55`, fontWeight: 700 }}>{p.label}</span>
@@ -316,7 +317,7 @@ export default function LandingPage() {
       </div>
 
       {/* ── RAND 2: Find Collaborators | Features ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: '0 40px 12px', maxWidth: 1400, margin: '0 auto' }}>
+      <div className="middle-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: '0 40px 12px', maxWidth: 1400, margin: '0 auto' }}>
 
         {/* 4. Find collaborators */}
         <div style={s.panel}>
@@ -361,7 +362,7 @@ export default function LandingPage() {
       </div>
 
       {/* ── RAND 3: Venues | CTA ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: '0 40px 32px', maxWidth: 1400, margin: '0 auto' }}>
+      <div className="bottom-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: '0 40px 32px', maxWidth: 1400, margin: '0 auto' }}>
 
         {/* Venues banner */}
         <div onClick={() => router.push('/venues')} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 14, padding: '28px 32px', cursor: 'pointer', position: 'relative', overflow: 'hidden', minHeight: 140 }}>
@@ -387,7 +388,7 @@ export default function LandingPage() {
       </div>
 
       {/* ── FOOTER ── */}
-      <div style={{ borderTop: '1px solid #1a1a1a', padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, maxWidth: 1280, margin: '0 auto' }}>
+      <div style={{ borderTop: '1px solid #1a1a1a', padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, maxWidth: 1400, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{ width: 26, height: 26, borderRadius: 7, background: '#ff6b35', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>🎤</div>
           <div>
