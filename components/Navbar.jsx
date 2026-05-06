@@ -53,6 +53,13 @@ export default function Navbar() {
           ))}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+          {/* Hamburger — vizibil doar pe mobile */}
+          <button
+            className="show-mobile-flex"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            style={{ width: 36, height: 36, borderRadius: 9, background: 'var(--bg3)', border: '1px solid var(--border)', display: 'none', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: 18, flexShrink: 0 }}>
+            {mobileOpen ? '✕' : '☰'}
+          </button>
           <div style={{ position: 'relative' }}>
             <button onClick={() => { setNotifOpen(!notifOpen); setMenuOpen(false) }}
               style={{ width: 36, height: 36, borderRadius: '50%', background: 'var(--bg3)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: 16, position: 'relative' }}>
