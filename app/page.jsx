@@ -136,7 +136,7 @@ export default function LandingPage() {
 
         {/* Right — Dashboard mockup exacta ca Image 2 */}
         <div style={{ background: '#141414', border: '1px solid #1e1e1e', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.5)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '175px 1fr 205px', minHeight: 260 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr 190px', minHeight: 300 }}>
 
             {/* Sidebar */}
             <div style={{ borderRight: '1px solid #1e1e1e', padding: '14px 12px', display: 'flex', flexDirection: 'column' }}>
@@ -175,7 +175,7 @@ export default function LandingPage() {
                 {DEMO_PROJECTS.map((p, i) => (
                   <div key={i} onClick={() => router.push('/projects')} style={{ background: '#1c1c1c', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', cursor: 'pointer' }}>
                     {/* Image large */}
-                    <div style={{ position: 'relative', height: 110, overflow: 'hidden', background: '#111' }}>
+                    <div style={{ position: 'relative', height: 140, overflow: 'hidden', background: '#111' }}>
                       <img src={p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 60%)' }} />
                       {p.hasAudio && (
@@ -185,21 +185,21 @@ export default function LandingPage() {
                       )}
                     </div>
                     {/* Content */}
-                    <div style={{ padding: '9px 10px' }}>
-                      <div style={{ fontSize: 11, fontWeight: 700, lineHeight: 1.3, marginBottom: 6, color: '#eee' }}>{p.title}</div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 4 }}>
-                        <span style={{ fontSize: 9, color: '#666' }}>Looking for:</span>
-                        <span style={{ fontSize: 8, padding: '2px 7px', borderRadius: 100, background: p.roleBg, color: p.roleColor, fontWeight: 700 }}>{p.role}</span>
+                    <div style={{ padding: '10px 12px' }}>
+                      <div style={{ fontSize: 12, fontWeight: 700, lineHeight: 1.3, marginBottom: 7, color: '#eee' }}>{p.title}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 5 }}>
+                        <span style={{ fontSize: 10, color: '#666' }}>Looking for:</span>
+                        <span style={{ fontSize: 9, padding: '2px 8px', borderRadius: 100, background: p.roleBg, color: p.roleColor, fontWeight: 700 }}>{p.role}</span>
                       </div>
-                      <div style={{ fontSize: 9, color: '#666', marginBottom: 8 }}>📍 {p.location}</div>
+                      <div style={{ fontSize: 10, color: '#666', marginBottom: 10 }}>📍 {p.location}</div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           {p.avSeeds.slice(0,3).map((seed, ai) => (
-                            <img key={ai} src={dicebear(seed)} alt="" style={{ width: 16, height: 16, borderRadius: '50%', border: '2px solid #1c1c1c', marginLeft: ai > 0 ? -6 : 0, background: '#1a1a1a' }} />
+                            <img key={ai} src={dicebear(seed)} alt="" style={{ width: 20, height: 20, borderRadius: '50%', border: '2px solid #1c1c1c', marginLeft: ai > 0 ? -7 : 0, background: '#1a1a1a' }} />
                           ))}
-                          <span style={{ fontSize: 8, color: '#555', marginLeft: 5 }}>+{p.extra}</span>
+                          <span style={{ fontSize: 9, color: '#555', marginLeft: 6 }}>+{p.extra}</span>
                         </div>
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
                       </div>
                     </div>
                   </div>
