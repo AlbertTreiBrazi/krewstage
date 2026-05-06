@@ -320,24 +320,25 @@ export default function LandingPage() {
       <div className="middle-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: '0 40px 12px', maxWidth: 1400, margin: '0 auto' }}>
 
         {/* 4. Find collaborators */}
-        <div style={s.panel}>
+        <div style={{ ...s.panel, display: 'flex', flexDirection: 'column' }}>
           <div style={{ ...s.sectionLabel, marginBottom: 12 }}>4. Find the right collaborators</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
             {ROLE_CHIPS.map(r => (
               <button key={r} onClick={() => router.push(`/discover?role=${r.toLowerCase()}`)} style={s.pill(activeRole === r)} onMouseEnter={() => setActiveRole(r)} onMouseLeave={() => setActiveRole('Vocalist')}>{r}</button>
             ))}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12, flex: 1 }}>
             {DEMO_MEMBERS.map(m => (
-              <div key={m.name} onClick={() => router.push('/discover')} style={{ background: '#181818', border: '1px solid #222', borderRadius: 10, padding: '14px 12px', cursor: 'pointer' }}>
-                <img src={dicebear(m.seed)} alt={m.name} style={{ width: 44, height: 44, borderRadius: '50%', marginBottom: 8, background: '#1a1a1a' }} />
-                <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 2 }}>{m.name}</div>
-                <div style={{ fontSize: 11, color: '#ff6b35', marginBottom: 4, fontWeight: 500 }}>{m.role}</div>
-                <div style={{ fontSize: 10, color: '#555', lineHeight: 1.3, marginBottom: 3 }}>{m.genres}</div>
-                <div style={{ fontSize: 10, color: '#555', marginBottom: 8 }}>📍 {m.city}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e' }} />
-                  <span style={{ fontSize: 10, color: '#4ade80', fontWeight: 500 }}>Open to Collab</span>
+              <div key={m.name} onClick={() => router.push('/discover')}
+                style={{ background: '#181818', border: '1px solid #222', borderRadius: 12, padding: '20px 16px', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}>
+                <img src={dicebear(m.seed)} alt={m.name} style={{ width: 56, height: 56, borderRadius: '50%', marginBottom: 12, background: '#1a1a1a' }} />
+                <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 3 }}>{m.name}</div>
+                <div style={{ fontSize: 12, color: '#ff6b35', marginBottom: 6, fontWeight: 600 }}>{m.role}</div>
+                <div style={{ fontSize: 11, color: '#555', lineHeight: 1.4, marginBottom: 4 }}>{m.genres}</div>
+                <div style={{ fontSize: 11, color: '#555', marginBottom: 10 }}>📍 {m.city}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 'auto' }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e' }} />
+                  <span style={{ fontSize: 11, color: '#4ade80', fontWeight: 600 }}>Open to Collab</span>
                 </div>
               </div>
             ))}
@@ -345,16 +346,14 @@ export default function LandingPage() {
         </div>
 
         {/* 5. Features */}
-        <div style={s.panel}>
-          <div style={{ ...s.sectionLabel, marginBottom: 16 }}>5. Features built for musicians</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+        <div style={{ ...s.panel, display: 'flex', flexDirection: 'column' }}>
+          <div style={{ ...s.sectionLabel, marginBottom: 20 }}>5. Features built for musicians</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20, flex: 1 }}>
             {FEATURES.map(f => (
-              <div key={f.title} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>{f.icon}</div>
-                <div>
-                  <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 3 }}>{f.title}</div>
-                  <div style={{ fontSize: 11, color: '#555', lineHeight: 1.4 }}>{f.desc}</div>
-                </div>
+              <div key={f.title} style={{ display: 'flex', flexDirection: 'column', gap: 10, background: '#181818', border: '1px solid #222', borderRadius: 12, padding: '18px 16px' }}>
+                <div style={{ width: 44, height: 44, borderRadius: 11, background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>{f.icon}</div>
+                <div style={{ fontSize: 13, fontWeight: 700 }}>{f.title}</div>
+                <div style={{ fontSize: 11, color: '#555', lineHeight: 1.5 }}>{f.desc}</div>
               </div>
             ))}
           </div>
@@ -365,24 +364,24 @@ export default function LandingPage() {
       <div className="bottom-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: '0 40px 32px', maxWidth: 1400, margin: '0 auto' }}>
 
         {/* Venues banner */}
-        <div onClick={() => router.push('/venues')} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 14, padding: '28px 32px', cursor: 'pointer', position: 'relative', overflow: 'hidden', minHeight: 140 }}>
+        <div onClick={() => router.push('/venues')} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 14, padding: '40px 40px', cursor: 'pointer', position: 'relative', overflow: 'hidden', minHeight: 200 }}>
           <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&q=60)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.25 }} />
           <div style={{ position: 'relative' }}>
-            <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 8, lineHeight: 1.3, fontFamily: 'Syne,system-ui' }}>For venues and organizers</div>
-            <div style={{ fontSize: 13, color: '#999', marginBottom: 20, lineHeight: 1.5 }}>Find artists, bands, and live-ready projects for your next event.</div>
-            <button onClick={e => { e.stopPropagation(); router.push('/venues') }} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '10px 22px', fontSize: 13, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Discover Artists</button>
+            <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 10, lineHeight: 1.3, fontFamily: 'Syne,system-ui' }}>For venues and organizers</div>
+            <div style={{ fontSize: 14, color: '#999', marginBottom: 28, lineHeight: 1.6 }}>Find artists, bands, and live-ready projects for your next event.</div>
+            <button onClick={e => { e.stopPropagation(); router.push('/venues') }} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '12px 26px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Discover Artists</button>
           </div>
         </div>
 
         {/* CTA box */}
-        <div style={{ background: '#111', border: '1px solid #2a2a2a', borderRadius: 14, padding: '28px 32px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <div style={{ fontSize: 24, fontWeight: 900, lineHeight: 1.2, marginBottom: 8, letterSpacing: '-0.5px', fontFamily: 'Syne,system-ui' }}>
+        <div style={{ background: '#111', border: '1px solid #2a2a2a', borderRadius: 14, padding: '40px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ fontSize: 28, fontWeight: 900, lineHeight: 1.2, marginBottom: 10, letterSpacing: '-0.5px', fontFamily: 'Syne,system-ui' }}>
             Your next song starts with the <span style={{ color: '#ff6b35' }}>right crew.</span>
           </div>
-          <div style={{ fontSize: 13, color: '#666', marginBottom: 22, lineHeight: 1.5 }}>Join KrewStage and connect with creators, collaborators, bands, and venues worldwide.</div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '12px 24px', fontSize: 14, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
-            <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '12px 24px', fontSize: 14, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
+          <div style={{ fontSize: 14, color: '#666', marginBottom: 28, lineHeight: 1.6 }}>Join KrewStage and connect with creators, collaborators, bands, and venues worldwide.</div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button onClick={() => router.push('/auth?mode=register')} style={{ background: '#ff6b35', border: 'none', borderRadius: 8, padding: '13px 28px', fontSize: 15, fontWeight: 600, color: '#fff', cursor: 'pointer' }}>Post a Project</button>
+            <button onClick={() => router.push('/projects')} style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 8, padding: '13px 28px', fontSize: 15, color: '#ddd', cursor: 'pointer', fontWeight: 500 }}>Explore Projects</button>
           </div>
         </div>
       </div>
