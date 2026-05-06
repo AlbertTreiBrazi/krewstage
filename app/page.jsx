@@ -11,21 +11,21 @@ const DEMO_PROJECTS = [
     image: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=600&q=80',
     role: 'Vocalist', roleColor: '#f472b6', roleBg: 'rgba(244,114,182,0.18)',
     location: 'Remote', hasAudio: true,
-    avs: ['#ff6b35','#a855f7','#3b82f6'],
+    avSeeds: ['maya-vocalist','ethan-producer','zoe-vocalist'], extra: 2,
   },
   {
     title: 'Guitarist & drummer for alt rock band',
     image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80',
     role: 'Guitarist, Drummer', roleColor: '#fb923c', roleBg: 'rgba(251,146,60,0.18)',
     location: 'Austin, TX',
-    avs: ['#10b981','#f472b6','#3b82f6','#fbbf24'],
+    avSeeds: ['alex-guitarist','jules-producer','jamie-drummer','zoe-vocalist'], extra: 4,
   },
   {
     title: 'Producer open to collaborate',
     image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&q=80',
     role: 'Producer', roleColor: '#4ade80', roleBg: 'rgba(74,222,128,0.18)',
     location: 'Remote',
-    avs: ['#a855f7','#ff6b35','#3b82f6'],
+    avSeeds: ['jules-producer','maya-vocalist','ethan-producer'], extra: 1,
   },
 ]
 
@@ -136,7 +136,7 @@ export default function LandingPage() {
 
         {/* Right — Dashboard mockup exacta ca Image 2 */}
         <div style={{ background: '#141414', border: '1px solid #1e1e1e', borderRadius: 14, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.5)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '155px 1fr 195px', minHeight: 260 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '175px 1fr 205px', minHeight: 260 }}>
 
             {/* Sidebar */}
             <div style={{ borderRight: '1px solid #1e1e1e', padding: '14px 12px', display: 'flex', flexDirection: 'column' }}>
@@ -148,7 +148,7 @@ export default function LandingPage() {
               </div>
               <div style={{ flex: 1 }}>
                 {[['🏠','Dashboard',true],['📁','Projects',false],['👥','Find Members',false],['💬','Messages',false,2],['🎸','Bands',false],['👤','Profile',false]].map(([ic,lb,ac,badge]) => (
-                  <div key={lb} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 7, marginBottom: 2, background: ac ? 'rgba(255,107,53,0.12)' : 'transparent', color: ac ? '#ff6b35' : '#666', fontSize: 12, fontWeight: ac ? 600 : 400, position: 'relative', cursor: 'pointer' }}>
+                  <div key={lb} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 7, marginBottom: 2, background: ac ? 'rgba(255,107,53,0.12)' : 'transparent', color: ac ? '#ff6b35' : '#666', fontSize: 13, fontWeight: ac ? 600 : 400, position: 'relative', cursor: 'pointer' }}>
                     <span style={{ fontSize: 13 }}>{ic}</span>{lb}
                     {badge && <span style={{ position: 'absolute', right: 8, background: '#ff6b35', color: '#fff', fontSize: 8, minWidth: 15, height: 15, borderRadius: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, padding: '0 3px' }}>{badge}</span>}
                   </div>
@@ -156,7 +156,7 @@ export default function LandingPage() {
               </div>
               {/* Alex Rivera bottom */}
               <div style={{ borderTop: '1px solid #1e1e1e', paddingTop: 10, marginTop: 8, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
-                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#ff6b35,#f7931e)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 800, color: '#fff', flexShrink: 0 }}>AR</div>
+                <img src={dicebear('alex-rivera-user')} alt="Alex Rivera" style={{ width: 30, height: 30, borderRadius: '50%', flexShrink: 0, background: '#1a1a1a' }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 11, fontWeight: 600, color: '#f0f0f0' }}>Alex Rivera</div>
                   <div style={{ fontSize: 9, color: '#ff6b35' }}>View Profile</div>
@@ -175,7 +175,7 @@ export default function LandingPage() {
                 {DEMO_PROJECTS.map((p, i) => (
                   <div key={i} onClick={() => router.push('/projects')} style={{ background: '#1c1c1c', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', cursor: 'pointer' }}>
                     {/* Image large */}
-                    <div style={{ position: 'relative', height: 80, overflow: 'hidden', background: '#111' }}>
+                    <div style={{ position: 'relative', height: 110, overflow: 'hidden', background: '#111' }}>
                       <img src={p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 60%)' }} />
                       {p.hasAudio && (
@@ -194,10 +194,10 @@ export default function LandingPage() {
                       <div style={{ fontSize: 9, color: '#666', marginBottom: 8 }}>📍 {p.location}</div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                          {p.avs.map((c, ai) => (
-                            <div key={ai} style={{ width: 16, height: 16, borderRadius: '50%', background: c, border: '2px solid #1c1c1c', marginLeft: ai > 0 ? -6 : 0 }} />
+                          {p.avSeeds.slice(0,3).map((seed, ai) => (
+                            <img key={ai} src={dicebear(seed)} alt="" style={{ width: 16, height: 16, borderRadius: '50%', border: '2px solid #1c1c1c', marginLeft: ai > 0 ? -6 : 0, background: '#1a1a1a' }} />
                           ))}
-                          <span style={{ fontSize: 8, color: '#555', marginLeft: 5 }}>+{p.avs.length}</span>
+                          <span style={{ fontSize: 8, color: '#555', marginLeft: 5 }}>+{p.extra}</span>
                         </div>
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
                       </div>
