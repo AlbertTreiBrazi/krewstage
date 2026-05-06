@@ -160,8 +160,8 @@ function BandDetailModal({ band: initialBand, currentUser, currentProfile, onClo
   const [inviteSearch, setInviteSearch] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [inviting, setInviting] = useState(null)
-  const isOwner = band.owner_id === currentUser.id
-  const isMember = band.band_members?.some(m => m.user_id === currentUser.id)
+  const isOwner = !!(currentUser?.id && band.owner_id === currentUser.id)
+  const isMember = !!(currentUser?.id && band.band_members?.some(m => m.user_id === currentUser.id))
   const members = band.band_members || []
 
   async function refreshBand() {
@@ -175,14 +175,14 @@ function BandDetailModal({ band: initialBand, currentUser, currentProfile, onClo
   async function search(q) {
     if (!q.trim()) { setSearchResults([]); return }
     const memberIds = members.map(m => m.user_id)
-    const { data } = await supabase.from('profiles').select('id, full_name, avatar_url, roles, city').ilike('full_name', `%${q}%`).not('id', 'in', `(${[currentUser.id, ...memberIds].join(',')})`).limit(5)
+    const { data } = await supabase.from('profiles').select('id, full_name, avatar_url, roles, city').ilike('full_name', `%${q}%`).not('id', 'in', `(${[currentUser?.id || "none", ...memberIds].join(',')})`).limit(5)
     setSearchResults(data || [])
   }
 
   async function invite(p) {
     setInviting(p.id)
     await supabase.from('band_members').insert({ band_id: band.id, user_id: p.id, role: 'member' })
-    await createNotification({ userId: p.id, type: 'band_invite', title: `You've been added to "${band.name}"`, body: `${currentProfile?.full_name || 'Someone'} invited you to join the band.`, link: '/bands', actorId: currentUser.id })
+    await createNotification({ userId: p.id, type: 'band_invite', title: `You've been added to "${band.name}"`, body: `${currentProfile?.full_name || 'Someone'} invited you to join the band.`, link: '/bands', actorId: currentUser?.id })
     setInviting(null); setInviteSearch(''); setSearchResults([])
     await refreshBand()  // stay open, just refresh members
   }
@@ -217,12 +217,12 @@ function BandDetailModal({ band: initialBand, currentUser, currentProfile, onClo
         {!isMember && !isOwner && (
           <button className="btn btn-brand btn-sm" onClick={async () => {
             if (!currentUser) { router.push('/auth?mode=register'); return }
-            await supabase.from('band_members').insert({ band_id: band.id, user_id: currentUser.id, role: 'member' })
-            await createNotification({ userId: band.owner_id, type: 'new_member', title: `${currentProfile?.full_name || 'Someone'} joined "${band.name}"`, body: 'A new member has joined your band.', link: '/bands', actorId: currentUser.id })
+            await supabase.from('band_members').insert({ band_id: band.id, user_id: currentUser?.id, role: 'member' })
+            await createNotification({ userId: band.owner_id, type: 'new_member', title: `${currentProfile?.full_name || 'Someone'} joined "${band.name}"`, body: 'A new member has joined your band.', link: '/bands', actorId: currentUser?.id })
             await refreshBand()
           }}>Join band</button>
         )}
-            {isMember && !isOwner && <button className="btn btn-danger btn-sm" onClick={() => { const m = members.find(m => m.user_id === currentUser.id); if (m) removeMember(m.id) }}>Leave band</button>}
+            {isMember && !isOwner && <button className="btn btn-danger btn-sm" onClick={() => { const m = members.find(m => m.user_id === currentUser?.id); if (m) removeMember(m.id) }}>Leave band</button>}
             {isOwner && <button className="btn btn-danger btn-sm" onClick={deleteBand}>🗑 Delete band</button>}
           </div>
         </div>
@@ -237,7 +237,7 @@ function BandDetailModal({ band: initialBand, currentUser, currentProfile, onClo
                 <div style={{ fontSize: 14, fontWeight: 500, cursor: 'pointer', color: 'var(--brand)' }} onClick={() => { router.push(`/profile/${m.user_id}`); onClose() }}>{m.profiles?.full_name || 'User'}</div>
                 <div style={{ fontSize: 12, color: 'var(--text2)' }}>{m.role === 'owner' ? '👑 Owner' : m.instrument || 'Member'}</div>
               </div>
-              {isOwner && m.user_id !== currentUser.id && <button onClick={() => removeMember(m.id)} style={{ background: 'none', border: 'none', color: 'var(--text3)', cursor: 'pointer', fontSize: 18 }}>×</button>}
+              {isOwner && m.user_id !== currentUser?.id && <button onClick={() => removeMember(m.id)} style={{ background: 'none', border: 'none', color: 'var(--text3)', cursor: 'pointer', fontSize: 18 }}>×</button>}
             </div>
           ))}
         </div>
