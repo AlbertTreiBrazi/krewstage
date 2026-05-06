@@ -18,34 +18,34 @@ export default function EditProfilePage() {
   const [formReady, setFormReady] = useState(false)
 
   useEffect(() => {
-    // Initializeaza form-ul imediat cu valorile disponibile (profile sau default)
-    // Nu astepta profile sa fie non-null — asta cauza spinner infinit
-    if (!formReady) {
+    // Asteapta profile din Supabase inainte de initializare (nu null)
+    // formReady previne re-initializarea dupa ce userul a inceput sa editeze
+    if (!formReady && profile) {
       setForm({
-        full_name: profile?.full_name || '',
-        city: profile?.city || '',
-        country: profile?.country || 'US',
-        bio: profile?.bio || '',
-        roles: profile?.roles || [],
-        instruments: profile?.instruments || [],
-        instrument_levels: profile?.instrument_levels || {},
-        genres: profile?.genres || [],
-        experience_level: profile?.experience_level || 'intermediate',
-        open_to_collaborate: profile?.open_to_collaborate ?? true,
-        available_days: profile?.available_days || [],
-        available_time: profile?.available_time || '',
-        is_venue: profile?.is_venue || false,
-        venue_name: profile?.venue_name || '',
-        venue_type: profile?.venue_type || '',
-        venue_capacity: profile?.venue_capacity || null,
-        venue_website: profile?.venue_website || '',
-        social_instagram: profile?.social_instagram || '',
-        social_youtube: profile?.social_youtube || '',
-        social_soundcloud: profile?.social_soundcloud || '',
-        social_spotify: profile?.social_spotify || '',
-        social_tiktok: profile?.social_tiktok || '',
-        website: profile?.website || '',
-        avatar_url: profile?.avatar_url || '',
+        full_name: profile.full_name || '',
+        city: profile.city || '',
+        country: profile.country || 'US',
+        bio: profile.bio || '',
+        roles: profile.roles || [],
+        instruments: profile.instruments || [],
+        instrument_levels: profile.instrument_levels || {},
+        genres: profile.genres || [],
+        experience_level: profile.experience_level || 'intermediate',
+        open_to_collaborate: profile.open_to_collaborate ?? true,
+        available_days: profile.available_days || [],
+        available_time: profile.available_time || '',
+        is_venue: profile.is_venue || false,
+        venue_name: profile.venue_name || '',
+        venue_type: profile.venue_type || '',
+        venue_capacity: profile.venue_capacity || null,
+        venue_website: profile.venue_website || '',
+        social_instagram: profile.social_instagram || '',
+        social_youtube: profile.social_youtube || '',
+        social_soundcloud: profile.social_soundcloud || '',
+        social_spotify: profile.social_spotify || '',
+        social_tiktok: profile.social_tiktok || '',
+        website: profile.website || '',
+        avatar_url: profile.avatar_url || '',
       })
       setFormReady(true)
     }
