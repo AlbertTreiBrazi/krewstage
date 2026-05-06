@@ -33,9 +33,10 @@ const DEMO_PROJECTS = [
 const dicebear = (seed) => `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(seed)}&backgroundColor=ff6b35,f472b6,a855f7,3b82f6,22c55e,fbbf24&backgroundType=gradientLinear`
 
 const DEMO_MESSAGES = [
-  { name: 'Maya',  msg: "Hey! I love your track. Let's collab. 🎵",  time: '2m ago',  unread: true,  seed: 'maya-vocalist' },
-  { name: 'Ethan', msg: "I'm interested in your project. Let's chat.", time: '10m ago', unread: true,  seed: 'ethan-producer' },
-  { name: 'Jamie', msg: 'Your song is dope. I can help with drums!',  time: '1h ago',  unread: false, seed: 'jamie-drummer' },
+  { name: 'Maya',    msg: "Hey! I love your track. Let's collab. 🎵",           time: '2m ago',  unread: true,  seed: 'maya-vocalist' },
+  { name: 'Ethan',   msg: "I'm interested in your project. Let's chat.",         time: '10m ago', unread: true,  seed: 'ethan-producer' },
+  { name: 'Jamie',   msg: 'Your song is dope. I can help with drums!',           time: '1h ago',  unread: false, seed: 'jamie-drummer' },
+  { name: 'Sofia',   msg: 'Would love to add vocals to your beat 🎤',            time: '3h ago',  unread: false, seed: 'zoe-vocalist' },
 ]
 
 const DEMO_MEMBERS = [
@@ -46,13 +47,20 @@ const DEMO_MEMBERS = [
 
 const ROLE_CHIPS = ['Vocalist','Guitarist','Bassist','Drummer','Keys','Producer','Composer','Lyricist','DJ','Sound Engineer']
 
+// SVG icons for features - mai profesionale
+const FeatIcon = ({ path, fill }) => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill={fill || 'none'} stroke="#ff6b35" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    {path}
+  </svg>
+)
+
 const FEATURES = [
-  { icon: '👥', title: 'Discover Members', desc: 'Find the right people for your sound.' },
-  { icon: '📁', title: 'Projects',         desc: 'Post ideas, find opportunities.' },
-  { icon: '🎸', title: 'Bands',            desc: 'Build your band. Grow together.' },
-  { icon: '💬', title: 'Messages',         desc: 'Chat and collaborate in real time.' },
-  { icon: '👤', title: 'Profiles',         desc: 'Showcase your music, skills, and vibe.' },
-  { icon: '🏛️', title: 'Venues',           desc: 'Connect with venues. Book more shows.' },
+  { icon: <FeatIcon path={<><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></>} />, title: 'Discover Members', desc: 'Find the right people for your sound.' },
+  { icon: <FeatIcon path={<><path d="M3 3h18v13H3z"/><path d="M8 21h8"/><path d="M12 16v5"/><circle cx="8" cy="10" r="1" fill="#ff6b35" stroke="none"/><path d="M11 10h6"/><path d="M11 13h4"/></>} />, title: 'Projects', desc: 'Post ideas, find opportunities.' },
+  { icon: <FeatIcon path={<><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></>} />, title: 'Bands', desc: 'Build your band. Grow together.' },
+  { icon: <FeatIcon path={<><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h8"/><path d="M8 14h5"/></>} />, title: 'Messages', desc: 'Chat and collaborate in real time.' },
+  { icon: <FeatIcon path={<><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16 3.5a2 2 0 010 7"/><path d="M19 6h3"/><path d="M20.5 7.5V4.5"/></>} />, title: 'Profiles', desc: 'Showcase your music, skills, and vibe.' },
+  { icon: <FeatIcon path={<><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M9 4v5"/><path d="M15 4v5"/><path d="M7 14h2"/><path d="M11 14h6"/><path d="M7 17h4"/></>} />, title: 'Venues', desc: 'Connect with venues. Book more shows.' },
 ]
 
 // ─── SOCIAL ICONS ─────────────────────────────────────────────────────────
@@ -154,6 +162,16 @@ export default function LandingPage() {
                     {badge && <span style={{ position: 'absolute', right: 8, background: '#ff6b35', color: '#fff', fontSize: 8, minWidth: 15, height: 15, borderRadius: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, padding: '0 3px' }}>{badge}</span>}
                   </div>
                 ))}
+                {/* Quick stats */}
+                <div style={{ margin: '12px 4px 0', padding: '10px', background: 'rgba(255,107,53,0.06)', borderRadius: 8, border: '1px solid rgba(255,107,53,0.12)' }}>
+                  <div style={{ fontSize: 9, color: '#ff6b35', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>Your activity</div>
+                  {[['🎵', '1', 'Active project'],['👥', '0', 'Collaborators'],['⭐', '0', 'Followers']].map(([ic,n,l]) => (
+                    <div key={l} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 5 }}>
+                      <span style={{ fontSize: 10, color: '#555' }}>{ic} {l}</span>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: '#f0f0f0' }}>{n}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               {/* Alex Rivera bottom */}
               <div style={{ borderTop: '1px solid #1e1e1e', paddingTop: 10, marginTop: 8, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
