@@ -1,4 +1,5 @@
 'use client'
+import { sanitizeUrl } from '../../lib/utils'
 export const dynamic = 'force-dynamic'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -60,7 +61,16 @@ export default function EditProfilePage() {
 
   async function save() {
     setSaving(true)
-    try { await updateProfile(form); setSaved(true); setTimeout(() => { setSaved(false); router.push('/profile') }, 1500) }
+    const sanitized = { ...form,
+      social_instagram:  sanitizeUrl(form.social_instagram),
+      social_youtube:    sanitizeUrl(form.social_youtube),
+      social_soundcloud: sanitizeUrl(form.social_soundcloud),
+      social_spotify:    sanitizeUrl(form.social_spotify),
+      social_tiktok:     sanitizeUrl(form.social_tiktok),
+      website:           sanitizeUrl(form.website),
+      venue_website:     sanitizeUrl(form.venue_website),
+    }
+    try { await updateProfile(sanitized); setSaved(true); setTimeout(() => { setSaved(false); router.push('/profile') }, 1500) }
     catch (err) { alert('Error: ' + err.message) }
     finally { setSaving(false) }
   }
