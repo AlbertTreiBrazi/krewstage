@@ -158,6 +158,7 @@ function ProjectCard({ project: p, onClick }) {
           <span>{timeAgo(p.created_at)}</span>
         </div>
       </div>
+      </div> {/* end padding div */}
     </div>
   )
 }
