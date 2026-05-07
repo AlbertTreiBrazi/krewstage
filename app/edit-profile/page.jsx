@@ -100,10 +100,9 @@ export default function EditProfilePage() {
         {/* Cover photo banner */}
         <div style={{ position: 'relative', height: 140 }}>
           <ImageUpload
-            userId={user?.id}
             currentUrl={form.cover_image_url}
             storagePath={`${user?.id}/cover`}
-            aspectRatio="cover"
+            height={140}
             label="Add cover photo"
             onUploaded={url => up('cover_image_url', url)}
           />
