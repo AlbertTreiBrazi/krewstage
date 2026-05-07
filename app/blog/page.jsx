@@ -102,7 +102,7 @@ export default function BlogPage() {
 
         {/* Featured post */}
         {filtered[0] && (
-          <div onClick={() => router.push('/blog')}
+          <div onClick={() => router.push(`/blog/${filtered[0].slug}`)}
             onMouseEnter={e => e.currentTarget.style.borderColor = '#ff6b35'}
             onMouseLeave={e => e.currentTarget.style.borderColor = '#1e1e1e'}
             style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 16, padding: '40px', marginBottom: 24, cursor: 'pointer', transition: 'border-color 0.2s', display: 'grid', gridTemplateColumns: '1fr auto', gap: 32, alignItems: 'center' }}>
@@ -124,7 +124,7 @@ export default function BlogPage() {
         {/* Rest of posts */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 16 }}>
           {filtered.slice(1).map(post => (
-            <div key={post.slug} onClick={() => router.push('/blog')}
+            <div key={post.slug} onClick={() => router.push(`/blog/${post.slug}`)}
               onMouseEnter={e => e.currentTarget.style.borderColor = '#ff6b35'}
               onMouseLeave={e => e.currentTarget.style.borderColor = '#1e1e1e'}
               style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 14, padding: '28px 24px', cursor: 'pointer', transition: 'border-color 0.2s', display: 'flex', flexDirection: 'column' }}>
