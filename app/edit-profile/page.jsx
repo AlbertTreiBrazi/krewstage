@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../../hooks/useAuth'
 import AvatarUpload from '../../components/AvatarUpload'
+import ImageUpload from '../../components/ImageUpload'
 import { ROLES, GENRES, EXPERIENCE_LEVELS, INSTRUMENT_LEVELS, DAYS, TIMES, VENUE_TYPES } from '../../lib/constants'
 
 const INSTRUMENTS = ['Guitar','Bass','Drums','Piano','Vocals','Electric Guitar','Saxophone','Trumpet','Violin','Ukulele','Synthesizer','Flute','Cello','Clarinet','Trombone']
@@ -47,6 +48,7 @@ export default function EditProfilePage() {
         social_tiktok: profile.social_tiktok || '',
         website: profile.website || '',
         avatar_url: profile.avatar_url || '',
+        cover_image_url: profile.cover_image_url || '',
       })
       setFormReady(true)
     }
@@ -68,6 +70,7 @@ export default function EditProfilePage() {
       social_spotify:    sanitizeUrl(form.social_spotify),
       social_tiktok:     sanitizeUrl(form.social_tiktok),
       website:           sanitizeUrl(form.website),
+      cover_image_url:   form.cover_image_url || null,
       venue_website:     sanitizeUrl(form.venue_website),
     }
     try { await updateProfile(sanitized); setSaved(true); setTimeout(() => { setSaved(false); router.push('/profile') }, 1500) }
@@ -92,12 +95,26 @@ export default function EditProfilePage() {
 
       {saved && <div className="alert alert-success">✓ Profile saved!</div>}
 
-      {/* Avatar */}
-      <div className="card" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 20 }}>
-        <AvatarUpload userId={user?.id} currentUrl={form.avatar_url} fullName={form.full_name} onUploaded={url => up('avatar_url', url)} />
-        <div>
-          <div style={{ fontWeight: 600 }}>Profile photo</div>
-          <div style={{ fontSize: 13, color: 'var(--text2)', marginTop: 4 }}>JPG, PNG or WebP · max 5MB</div>
+      {/* Cover photo + Avatar */}
+      <div className="card" style={{ marginBottom: 14, padding: 0, overflow: 'hidden' }}>
+        {/* Cover photo banner */}
+        <div style={{ position: 'relative', height: 140 }}>
+          <ImageUpload
+            userId={user?.id}
+            currentUrl={form.cover_image_url}
+            storagePath={`${user?.id}/cover`}
+            aspectRatio="cover"
+            label="Add cover photo"
+            onUploaded={url => up('cover_image_url', url)}
+          />
+          {/* Avatar suprapus pe cover */}
+          <div style={{ position: 'absolute', bottom: -30, left: 20, zIndex: 10, border: '3px solid var(--card)', borderRadius: '50%' }}>
+            <AvatarUpload userId={user?.id} currentUrl={form.avatar_url} fullName={form.full_name} onUploaded={url => up('avatar_url', url)} />
+          </div>
+        </div>
+        <div style={{ padding: '40px 20px 16px' }}>
+          <div style={{ fontWeight: 600, fontSize: 14 }}>Profile photo & cover</div>
+          <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 4 }}>Click pe poză sau cover pentru a le schimba · JPG, PNG, WebP · max 8MB</div>
         </div>
       </div>
 
