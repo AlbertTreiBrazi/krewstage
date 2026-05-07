@@ -161,7 +161,13 @@ export default function ProjectDetailClient({ projectId }) {
       <button className="btn btn-ghost btn-sm" onClick={() => router.push('/projects')} style={{ marginBottom: 20 }}>← Back to projects</button>
 
       {/* Header */}
-      <div className="card" style={{ marginBottom: 16 }}>
+      <div className="card" style={{ marginBottom: 16, padding: 0, overflow: 'hidden' }}>
+        {project.image_url && (
+          <div style={{ height: 220, overflow: 'hidden' }}>
+            <img src={project.image_url} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+        )}
+        <div style={{ padding: 20 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16, gap: 16 }}>
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
@@ -191,6 +197,7 @@ export default function ProjectDetailClient({ projectId }) {
             <div style={{ fontSize: 14, fontWeight: 500, cursor: 'pointer', color: 'var(--brand)' }} onClick={() => router.push(`/profile/${project.owner.id}`)}>{project.owner?.full_name}</div>
             <div style={{ fontSize: 12, color: 'var(--text3)' }}>{project.owner?.city} · posted {timeAgo(project.created_at)}</div>
           </div>
+        </div>
         </div>
       </div>
 
