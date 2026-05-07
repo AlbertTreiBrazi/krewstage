@@ -55,6 +55,13 @@ export default function PublicLayout({ children }) {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+          {/* Hamburger — vizibil doar pe mobile */}
+          <button
+            className="show-mobile-flex"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            style={{ width: 36, height: 36, borderRadius: 9, background: 'var(--bg3)', border: '1px solid var(--border)', display: 'none', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: 18, flexShrink: 0 }}>
+            {mobileOpen ? '✕' : '☰'}
+          </button>
           {user ? (
             <>
               <div style={{ position: 'relative' }}>
@@ -102,6 +109,29 @@ export default function PublicLayout({ children }) {
           )}
         </div>
       </nav>
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div onClick={() => setMobileOpen(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 99 }}>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--card2)', borderTop: '1px solid var(--border2)', borderRadius: '20px 20px 0 0', padding: '16px 16px 32px' }}>
+            <div style={{ width: 36, height: 4, background: 'var(--border2)', borderRadius: 2, margin: '0 auto 20px' }} />
+            {TABS.filter(t => t.path !== '/messages' || user).map(tab => (
+              <button key={tab.path} onClick={() => {
+                if (!user && tab.path === '/messages') { router.push('/auth'); return }
+                router.push(tab.path)
+              }}
+                style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 14, padding: '13px 16px', borderRadius: 12, border: 'none', cursor: 'pointer', fontFamily: 'DM Sans,sans-serif', fontSize: 16, fontWeight: 500, marginBottom: 4, transition: 'all 0.15s', background: isActive(tab.path) ? 'var(--brand-dim)' : 'transparent', color: isActive(tab.path) ? 'var(--brand)' : 'var(--text)' }}>
+                <span style={{ fontSize: 20 }}>{tab.icon}</span>{tab.label}
+              </button>
+            ))}
+            {!user && (
+              <div style={{ display: 'flex', gap: 8, marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--border)' }}>
+                <button onClick={() => router.push('/auth')} style={{ flex: 1, background: 'transparent', border: '1px solid var(--border2)', borderRadius: 10, padding: '11px', fontSize: 14, color: 'var(--text2)', cursor: 'pointer' }}>Log In</button>
+                <button onClick={() => router.push('/auth?mode=register')} style={{ flex: 1, background: 'var(--brand)', border: 'none', borderRadius: 10, padding: '11px', fontSize: 14, fontWeight: 700, color: '#fff', cursor: 'pointer' }}>Sign Up</button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
       {children}
     </>
   )
