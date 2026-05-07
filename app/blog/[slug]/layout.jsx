@@ -1,3 +1,1 @@
-'use client'
-import PublicLayout from '../../../components/PublicLayout'
-export default function Layout({ children }) { return <PublicLayout>{children}</PublicLayout> }
+export default function Layout({ children }) { return children }
