@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
+import { sanitizeUrl } from '../../lib/utils'
 import { PROJECT_TYPES, GENRES, timeAgo, getAvatarGradient, getInitials } from '../../lib/constants'
 import Avatar from '../../components/Avatar'
 import RoleBadge from '../../components/RoleBadge'
@@ -145,7 +146,7 @@ function VenueCard({ venue: v, onClick }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: 12, color: 'var(--text3)' }}>👥 {v.followers_count || 0} followers</span>
         {v.venue_website && (
-          <a href={v.venue_website} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+          <a href={sanitizeUrl(v.venue_website)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
             <button className="btn btn-ghost btn-sm">🌐 Website</button>
           </a>
         )}
