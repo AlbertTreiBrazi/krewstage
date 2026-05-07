@@ -262,7 +262,7 @@ export default function ProfilePageClient({ userId }) {
             ))}
           </div>
         )}
-        </div> {/* end padding div */}
+        </div>
       </div>
 
       {/* Instruments */}
