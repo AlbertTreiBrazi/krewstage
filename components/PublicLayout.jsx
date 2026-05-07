@@ -22,6 +22,7 @@ export default function PublicLayout({ children }) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [notifOpen, setNotifOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const menuRef = useRef(null)
 
   useEffect(() => { setMenuOpen(false); setNotifOpen(false) }, [pathname])
