@@ -107,7 +107,10 @@ export default function LandingPage() {
             <span key={item.l} onClick={() => {
               if (item.p === '#how') document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' })
               else router.push(item.p)
-            }} style={{ fontSize: 14, color: '#999', cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap' }}>{item.l}</span>
+            }} style={{ fontSize: 14, color: '#ccc', cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap', transition: 'color 0.2s' }}
+              onMouseEnter={e => e.target.style.color = '#ff6b35'}
+              onMouseLeave={e => e.target.style.color = '#ccc'}
+            >{item.l}</span>
           ))}
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexShrink: 0 }}>
@@ -195,7 +198,10 @@ export default function LandingPage() {
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, flex: 1 }}>
                 {DEMO_PROJECTS.map((p, i) => (
-                  <div key={i} onClick={() => router.push('/projects')} style={{ background: '#1c1c1c', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}>
+                  <div key={i} onClick={() => router.push('/projects')}
+                    onMouseEnter={e => e.currentTarget.style.borderColor = '#ff6b35'}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = '#222'}
+                    style={{ background: '#1c1c1c', border: '1px solid #222', borderRadius: 10, overflow: 'hidden', cursor: 'pointer', display: 'flex', flexDirection: 'column', transition: 'border-color 0.2s' }}>
                     {/* Image — flex: 1 umplu spatiul ramas */}
                     <div style={{ position: 'relative', flex: 1, minHeight: 120, overflow: 'hidden', background: '#111' }}>
                       <img src={p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', position: 'absolute', inset: 0 }} />
@@ -318,7 +324,10 @@ export default function LandingPage() {
               { genre: 'LIVE EVENT', label: 'Venue',    title: 'Indie Night at The Hollow',       loc: 'Brooklyn, NY', c: '#fbbf24', img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=300&q=70' },
               { genre: 'COUNTRY',    label: 'Band',     title: 'Country Songwriter Seeking Band',  loc: 'Nashville',    c: '#fb923c', img: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&q=70' },
             ].map(p => (
-              <div key={p.title} onClick={() => router.push('/projects')} style={{ background: '#181818', border: '1px solid #222', borderRadius: 8, overflow: 'hidden', cursor: 'pointer' }}>
+              <div key={p.title} onClick={() => router.push('/projects')}
+                onMouseEnter={e => e.currentTarget.style.borderColor = '#ff6b35'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = '#222'}
+                style={{ background: '#181818', border: '1px solid #222', borderRadius: 8, overflow: 'hidden', cursor: 'pointer', transition: 'border-color 0.2s' }}>
                 <div style={{ height: 90, position: 'relative', overflow: 'hidden' }}>
                   <img src={p.img} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.8),transparent 50%)' }} />
@@ -352,8 +361,10 @@ export default function LandingPage() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12, flex: 1 }}>
             {DEMO_MEMBERS.map(m => (
-              <div key={m.name} onClick={() => router.push('/discover')}
-                style={{ background: '#181818', border: '1px solid #222', borderRadius: 12, padding: '20px 16px', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}>
+              <div key={m.name} onClick={() => router.push(`/discover?role=${m.role.toLowerCase().replace(' ','')}`) }
+                onMouseEnter={e => e.currentTarget.style.borderColor = '#ff6b35'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = '#222'}
+                style={{ background: '#181818', border: '1px solid #222', borderRadius: 12, padding: '20px 16px', cursor: 'pointer', display: 'flex', flexDirection: 'column', transition: 'border-color 0.2s' }}>
                 <img src={dicebear(m.seed)} alt={m.name} style={{ width: 56, height: 56, borderRadius: '50%', marginBottom: 12, background: '#1a1a1a' }} />
                 <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 3 }}>{m.name}</div>
                 <div style={{ fontSize: 12, color: '#ff6b35', marginBottom: 6, fontWeight: 600 }}>{m.role}</div>
@@ -419,7 +430,7 @@ export default function LandingPage() {
             <div style={{ fontSize: 11, color: '#555', marginTop: 1 }}>Find your music crew. Build songs. <span style={{ color: '#ff6b35' }}>Reach the stage.</span></div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 18, color: '#555' }}>
+        <div style={{ display: 'flex', gap: 18, color: '#888' }}>
           {[
             { href: 'https://instagram.com/krewstage', svg: <IG /> },
             { href: 'https://tiktok.com/@krewstage', svg: <TT /> },
@@ -435,10 +446,16 @@ export default function LandingPage() {
           ))}
         </div>
         <div style={{ display: 'flex', gap: 20 }}>
-          {['About','Blog','Help Center','Terms','Privacy'].map(l => (
-            <span key={l} onClick={() => router.push('/auth')} style={{ fontSize: 12, color: '#555', cursor: 'pointer' }}
-              onMouseEnter={e => e.target.style.color = '#f0f0f0'}
-              onMouseLeave={e => e.target.style.color = '#555'}>
+          {[
+            { l: 'About', p: '/discover' },
+            { l: 'Blog', p: '/projects' },
+            { l: 'Help Center', p: '/discover' },
+            { l: 'Terms', p: '/auth' },
+            { l: 'Privacy', p: '/auth' },
+          ].map(({ l, p }) => (
+            <span key={l} onClick={() => router.push(p)} style={{ fontSize: 13, color: '#888', cursor: 'pointer', fontWeight: 500 }}
+              onMouseEnter={e => e.target.style.color = '#ff6b35'}
+              onMouseLeave={e => e.target.style.color = '#888'}>
               {l}
             </span>
           ))}
