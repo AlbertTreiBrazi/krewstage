@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
+import { sanitizeUrl } from '../lib/utils'
 import { createNotification } from '../hooks/useNotifications'
 import { PROJECT_STATUSES, PROJECT_TYPES, LOCATION_TYPES, getRoleInfo, timeAgo } from '../lib/constants'
 import Avatar from './Avatar'
@@ -214,7 +215,7 @@ export default function ProjectDetailClient({ projectId }) {
         <div className="card" style={{ marginBottom: 16 }}>
           <p className="section-title">Reference tracks</p>
           {project.reference_links.filter(l => l).map((link, i) => (
-            <a key={i} href={link} target="_blank" rel="noopener noreferrer"
+            <a key={i} href={sanitizeUrl(link)} target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', color: 'var(--brand)', fontSize: 14, marginBottom: 6, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               🔗 {link}
             </a>
@@ -292,7 +293,7 @@ export default function ProjectDetailClient({ projectId }) {
                 <span className={`badge ${app.status === 'accepted' ? 'badge-green' : app.status === 'rejected' ? 'badge-gray' : 'badge-amber'}`}>{app.status}</span>
               </div>
               {app.message && <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6, marginBottom: 12, background: 'var(--bg3)', padding: '10px 14px', borderRadius: 'var(--radius-sm)' }}>{app.message}</p>}
-              {app.demo_url && <a href={app.demo_url} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm" style={{ textDecoration: 'none', marginBottom: 12 }}>🎵 Listen to demo</a>}
+              {app.demo_url && <a href={sanitizeUrl(app.demo_url)} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm" style={{ textDecoration: 'none', marginBottom: 12 }}>🎵 Listen to demo</a>}
               {app.status === 'pending' && (
                 <div style={{ display: 'flex', gap: 8 }}>
                   <button className="btn btn-ghost-brand btn-sm" onClick={() => handleApplication(app.id, app.applicant_id, true)}>✓ Accept</button>
