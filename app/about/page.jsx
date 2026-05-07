@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'
 import { useRouter } from 'next/navigation'
 
 const TEAM = [
-  { name: 'Albert Treibrazi', role: 'Founder & CEO', emoji: '🎸', bio: 'Musician and developer. Built KrewStage after struggling to find collaborators for his own projects.' },
+  { name: 'Albert Florian', role: 'Founder & CEO', emoji: '🎸', bio: 'Musician and developer. Built KrewStage after struggling to find collaborators for his own projects.' },
   { name: 'Mihai Ionescu', role: 'Head of Product', emoji: '🎹', bio: 'Producer and UX designer. Obsessed with making music collaboration as frictionless as possible.' },
   { name: 'Ana Vlad', role: 'Community Lead', emoji: '🎤', bio: 'DJ and community builder. Connects artists across Romania and beyond.' },
 ]
