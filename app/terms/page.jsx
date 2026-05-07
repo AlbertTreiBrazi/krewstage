@@ -103,11 +103,7 @@ export default function TermsPage() {
           </div>
         ))}
 
-        {/* Bottom nav */}
-        <div style={{ display: 'flex', gap: 12, paddingTop: 20, flexWrap: 'wrap' }}>
-          <button onClick={() => router.push('/privacy')} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '11px 20px', fontSize: 13, color: '#ccc', cursor: 'pointer' }}>Privacy Policy →</button>
-          <button onClick={() => router.push('/help')} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '11px 20px', fontSize: 13, color: '#ccc', cursor: 'pointer' }}>Help Center →</button>
-        </div>
+
       </div>
 
     </div>
