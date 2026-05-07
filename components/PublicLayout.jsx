@@ -134,6 +134,64 @@ export default function PublicLayout({ children }) {
         </div>
       )}
       {children}
+      {/* ── FOOTER GLOBAL ── */}
+      <footer style={{ borderTop: '1px solid var(--border)', background: 'rgba(13,13,13,0.98)', marginTop: 'auto' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 24px 24px' }}>
+          {/* Top row */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 32, marginBottom: 36 }}>
+            {/* Brand */}
+            <div>
+              <div onClick={() => router.push('/')} style={{ fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 20, color: 'var(--brand)', cursor: 'pointer', letterSpacing: '-0.3px', marginBottom: 6 }}>
+                Krew<span style={{ color: 'var(--text2)', fontWeight: 400 }}>Stage</span>
+              </div>
+              <div style={{ fontSize: 12, color: 'var(--text3)', maxWidth: 220, lineHeight: 1.6 }}>Find your music crew. Build songs. Reach the stage.</div>
+            </div>
+            {/* Links */}
+            <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap' }}>
+              <div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--brand)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>Platform</div>
+                {[['Discover','/discover'],['Projects','/projects'],['Bands','/bands'],['Venues','/venues']].map(([l,p]) => (
+                  <div key={l} onClick={() => router.push(p)} style={{ fontSize: 13, color: 'var(--text2)', cursor: 'pointer', marginBottom: 8, transition: 'color 0.15s' }}
+                    onMouseEnter={e => e.target.style.color = 'var(--brand)'}
+                    onMouseLeave={e => e.target.style.color = 'var(--text2)'}>{l}</div>
+                ))}
+              </div>
+              <div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--brand)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>Company</div>
+                {[['About','/about'],['Blog','/blog'],['Help Center','/help']].map(([l,p]) => (
+                  <div key={l} onClick={() => router.push(p)} style={{ fontSize: 13, color: 'var(--text2)', cursor: 'pointer', marginBottom: 8, transition: 'color 0.15s' }}
+                    onMouseEnter={e => e.target.style.color = 'var(--brand)'}
+                    onMouseLeave={e => e.target.style.color = 'var(--text2)'}>{l}</div>
+                ))}
+              </div>
+              <div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--brand)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>Legal</div>
+                {[['Terms','/terms'],['Privacy','/privacy']].map(([l,p]) => (
+                  <div key={l} onClick={() => router.push(p)} style={{ fontSize: 13, color: 'var(--text2)', cursor: 'pointer', marginBottom: 8, transition: 'color 0.15s' }}
+                    onMouseEnter={e => e.target.style.color = 'var(--brand)'}
+                    onMouseLeave={e => e.target.style.color = 'var(--text2)'}>{l}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* Bottom row */}
+          <div style={{ borderTop: '1px solid var(--border)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+            <div style={{ fontSize: 12, color: 'var(--text3)' }}>© 2026 KrewStage SRL. All rights reserved.</div>
+            <div style={{ display: 'flex', gap: 16 }}>
+              {[
+                { href: 'https://instagram.com/krewstage', label: 'IG' },
+                { href: 'https://tiktok.com/@krewstage', label: 'TT' },
+                { href: 'https://discord.gg/krewstage', label: 'DC' },
+              ].map(s => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                  style={{ fontSize: 12, color: 'var(--text3)', textDecoration: 'none', transition: 'color 0.15s' }}
+                  onMouseEnter={e => e.target.style.color = 'var(--brand)'}
+                  onMouseLeave={e => e.target.style.color = 'var(--text3)'}>{s.label}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
   )
 }
