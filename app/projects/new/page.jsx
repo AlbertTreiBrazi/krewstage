@@ -1,6 +1,6 @@
 'use client'
 export const dynamic = 'force-dynamic'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../../lib/supabase'
 import { useAuth } from '../../../hooks/useAuth'
@@ -11,6 +11,7 @@ export default function CreateProjectPage() {
   const { user, loading } = useAuth()
   const router = useRouter()
   const [saving, setSaving] = useState(false)
+  const projectImagePathRef = useRef(null)
   const [error, setError] = useState('')
   const [audioFile, setAudioFile] = useState(null)
   const [audioUploading, setAudioUploading] = useState(false)
@@ -129,8 +130,8 @@ export default function CreateProjectPage() {
               <ImageUpload
                 userId={user?.id}
                 currentUrl={form.image_url}
-                storagePath={`${user?.id}/project_${Date.now()}`}
-                aspectRatio="project"
+                storagePath={projectImagePathRef.current || (projectImagePathRef.current = `${user?.id}/project_${Date.now()}`)}
+                height={180}
                 label="Add a project photo"
                 onUploaded={url => up('image_url', url)}
               />
