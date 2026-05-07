@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
+import { sanitizeUrl } from '../lib/utils'
 import { useFollow } from '../hooks/useFollow'
 import { getOrCreateConversation } from '../lib/conversations'
 import { getRoleInfo, getAvatarGradient, getInitials, timeAgo, EXPERIENCE_LEVELS, PROJECT_STATUSES } from '../lib/constants'
@@ -240,7 +241,7 @@ export default function ProfilePageClient({ userId }) {
               { key: 'social_tiktok', icon: '🎵', label: 'TikTok' },
               { key: 'website', icon: '🌐', label: 'Website' },
             ].filter(s => profile[s.key]).map(s => (
-              <a key={s.key} href={profile[s.key]} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+              <a key={s.key} href={sanitizeUrl(profile[s.key])} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                 <button className="btn btn-ghost btn-sm">{s.icon} {s.label}</button>
               </a>
             ))}
