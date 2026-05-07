@@ -79,15 +79,20 @@ export default function BandsPage() {
 }
 
 function BandCard({ band, currentUserId, onClick }) {
-  const isOwner = band.owner_id === currentUserId
-  const isMember = band.band_members?.some(m => m.user_id === currentUserId)
+  const isOwner = !!(currentUserId && band.owner_id === currentUserId)
+  const isMember = !!(currentUserId && band.band_members?.some(m => m.user_id === currentUserId))
+  const accent = band.cover_color || '#ff6b35'
   return (
-    <div className="card card-hover" onClick={onClick} style={{ padding: 0, overflow: 'hidden' }}>
-      <div style={{ height: 52, background: band.cover_color || '#ff6b35', position: 'relative' }}>
-        <div style={{ position: 'absolute', bottom: -20, left: 18, width: 42, height: 42, borderRadius: 11, background: band.cover_color || '#ff6b35', border: '3px solid var(--card)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 18, color: 'white' }}>{band.name[0].toUpperCase()}</div>
-        {(isMember || isOwner) && <span style={{ position: 'absolute', top: 8, right: 8, background: 'rgba(0,0,0,0.5)', borderRadius: 100, padding: '2px 10px', fontSize: 11, color: 'white' }}>{isOwner ? '👑 Owner' : '✓ Member'}</span>}
+    <div className="card card-hover" onClick={onClick} style={{ padding: 0, overflow: 'hidden', borderTop: `3px solid ${accent}` }}>
+      <div style={{ padding: '18px 18px 0', display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div style={{ width: 46, height: 46, borderRadius: 12, background: `${accent}22`, border: `1.5px solid ${accent}44`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 20, color: accent, flexShrink: 0 }}>{band.name[0].toUpperCase()}</div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{band.name}</h3>
+          {band.city && <div style={{ fontSize: 12, color: 'var(--text3)' }}>📍 {band.city}</div>}
+        </div>
+        {(isMember || isOwner) && <span style={{ background: 'var(--bg3)', borderRadius: 100, padding: '2px 10px', fontSize: 11, color: 'var(--text2)', flexShrink: 0 }}>{isOwner ? '👑 Owner' : '✓ Member'}</span>}
       </div>
-      <div style={{ padding: '28px 18px 18px' }}>
+      <div style={{ padding: '14px 18px 18px' }}>
         <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 8 }}>{band.name}</h3>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 10 }}>
           {band.genre && <span className="badge badge-purple">{band.genre}</span>}
@@ -200,15 +205,18 @@ function BandDetailModal({ band: initialBand, currentUser, currentProfile, onClo
 
   return (
     <Modal onClose={onClose} title={null} wide>
-      <div style={{ height: 68, background: band.cover_color || '#ff6b35', borderRadius: '12px 12px 0 0', margin: '-24px -24px 0', position: 'relative' }}>
-        <div style={{ position: 'absolute', bottom: -22, left: 22, width: 50, height: 50, borderRadius: 13, background: band.cover_color, border: '3px solid var(--card)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 20, color: 'white' }}>{band.name[0].toUpperCase()}</div>
-        <button onClick={onClose} style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(0,0,0,0.4)', border: 'none', borderRadius: 8, color: 'white', fontSize: 20, cursor: 'pointer', width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
+      <div style={{ borderBottom: `3px solid ${band.cover_color || '#ff6b35'}`, borderRadius: '12px 12px 0 0', margin: '-24px -24px 0', padding: '20px 24px 20px', background: 'var(--card2)', position: 'relative', display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div style={{ width: 52, height: 52, borderRadius: 13, background: `${band.cover_color || '#ff6b35'}22`, border: `2px solid ${band.cover_color || '#ff6b35'}55`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 22, color: band.cover_color || '#ff6b35', flexShrink: 0 }}>{band.name[0].toUpperCase()}</div>
+        <div>
+          <div style={{ fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 20, color: 'var(--text)' }}>{band.name}</div>
+          {band.city && <div style={{ fontSize: 13, color: 'var(--text3)', marginTop: 2 }}>📍 {band.city}</div>}
+        </div>
+        <button onClick={onClose} style={{ position: 'absolute', top: 14, right: 14, background: 'var(--bg3)', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text2)', fontSize: 18, cursor: 'pointer', width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
       </div>
-      <div style={{ marginTop: 32 }}>
+      <div style={{ marginTop: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 800 }}>{band.name}</h2>
-            <div style={{ display: 'flex', gap: 7, marginTop: 7 }}>
+            <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
               {band.genre && <span className="badge badge-purple">{band.genre}</span>}
               {band.city && <span className="badge badge-blue">📍 {band.city}</span>}
             </div>
