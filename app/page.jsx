@@ -447,11 +447,11 @@ export default function LandingPage() {
         </div>
         <div style={{ display: 'flex', gap: 20 }}>
           {[
-            { l: 'About', p: '/discover' },
-            { l: 'Blog', p: '/projects' },
-            { l: 'Help Center', p: '/discover' },
-            { l: 'Terms', p: '/auth' },
-            { l: 'Privacy', p: '/auth' },
+            { l: 'About', p: '/about' },
+            { l: 'Blog', p: '/blog' },
+            { l: 'Help Center', p: '/help' },
+            { l: 'Terms', p: '/terms' },
+            { l: 'Privacy', p: '/privacy' },
           ].map(({ l, p }) => (
             <span key={l} onClick={() => router.push(p)} style={{ fontSize: 13, color: '#888', cursor: 'pointer', fontWeight: 500 }}
               onMouseEnter={e => e.target.style.color = '#ff6b35'}
