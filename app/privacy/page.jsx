@@ -146,12 +146,7 @@ export default function PrivacyPage() {
           </div>
         ))}
 
-        {/* Bottom nav */}
-        <div style={{ display: 'flex', gap: 12, paddingTop: 20, flexWrap: 'wrap' }}>
-          <button onClick={() => router.push('/terms')} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '11px 20px', fontSize: 13, color: '#ccc', cursor: 'pointer' }}>Terms of Service →</button>
-          <button onClick={() => router.push('/help')} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '11px 20px', fontSize: 13, color: '#ccc', cursor: 'pointer' }}>Help Center →</button>
-          <a href="mailto:privacy@krewstage.com" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '11px 20px', fontSize: 13, color: '#ccc', cursor: 'pointer', textDecoration: 'none' }}>Contact Privacy Team →</a>
-        </div>
+
       </div>
 
     </div>
