@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { supabase } from '../../../lib/supabase'
 import { useAuth } from '../../../hooks/useAuth'
 import { ROLES, GENRES, MOODS, PROJECT_TYPES, LOCATION_TYPES } from '../../../lib/constants'
+import ImageUpload from '../../../components/ImageUpload'
 
 export default function CreateProjectPage() {
   const { user, loading } = useAuth()
@@ -14,7 +15,7 @@ export default function CreateProjectPage() {
   const [audioFile, setAudioFile] = useState(null)
   const [audioUploading, setAudioUploading] = useState(false)
   const [form, setForm] = useState({
-    title: '', description: '', genre: '', mood: '',
+    title: '', description: '', genre: '', mood: '', image_url: '',
     project_type: 'collab', location_type: 'both', location_city: '',
     roles_needed: [], reference_links: [''],
     demo_audio_url: '', demo_audio_key: ''
@@ -58,7 +59,8 @@ export default function CreateProjectPage() {
         location_city: form.location_city || null,
         roles_needed: form.roles_needed,
         reference_links: refs, demo_audio_url: form.demo_audio_url || null,
-        demo_audio_key: form.demo_audio_key || null, status: 'open'
+        demo_audio_key: form.demo_audio_key || null, status: 'open',
+        image_url: form.image_url || null
       }).select().single()
       if (err) throw err
       router.push(`/projects/${data.id}`)
@@ -120,6 +122,20 @@ export default function CreateProjectPage() {
         {/* Title + Genre */}
         <div className="card">
           <p className="section-title">Project details</p>
+          {/* Project image */}
+          <div style={{ marginBottom: 14 }}>
+            <label>Project photo <span style={{ color: 'var(--text3)', fontWeight: 400 }}>(optional)</span></label>
+            <div style={{ height: 180, marginTop: 6, borderRadius: 12, overflow: 'hidden' }}>
+              <ImageUpload
+                userId={user?.id}
+                currentUrl={form.image_url}
+                storagePath={`${user?.id}/project_${Date.now()}`}
+                aspectRatio="project"
+                label="Add a project photo"
+                onUploaded={url => up('image_url', url)}
+              />
+            </div>
+          </div>
           <div style={{ marginBottom: 14 }}><label>Project title *</label><input placeholder='e.g. "Need vocalist for dark pop track"' value={form.title} onChange={e => up('title', e.target.value)} /></div>
           <div style={{ marginBottom: 14 }}><label>Description</label><textarea rows={4} placeholder="Describe your project, what you've made so far, what you're looking for..." value={form.description} onChange={e => up('description', e.target.value)} style={{ resize: 'none' }} /></div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
