@@ -263,6 +263,7 @@ export default function ProfilePageClient({ userId }) {
           </div>
         )}
         </div>
+        </div>
       </div>
 
       {/* Instruments */}
