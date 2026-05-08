@@ -1,5 +1,4 @@
 User-agent: *
-Allow: /
 
 # Pagini publice — indexabile de Google
 Allow: /
@@ -7,10 +6,19 @@ Allow: /discover
 Allow: /projects
 Allow: /bands
 Allow: /venues
+Allow: /about
+Allow: /blog
+Allow: /help
+Allow: /terms
+Allow: /privacy
 
 # Pagini private — nu indexa
 Disallow: /messages
 Disallow: /edit-profile
 Disallow: /auth
+Disallow: /profile/
+
+# Profiluri publice — indexabile
+Allow: /profile/
 
 Sitemap: https://krewstage.com/sitemap.xml
