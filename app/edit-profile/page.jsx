@@ -70,7 +70,7 @@ export default function EditProfilePage() {
       social_spotify:    sanitizeUrl(form.social_spotify),
       social_tiktok:     sanitizeUrl(form.social_tiktok),
       website:           sanitizeUrl(form.website),
-      cover_image_url:   form.cover_image_url || null,
+      cover_image_url:   sanitizeUrl(form.cover_image_url) || null,
       venue_website:     sanitizeUrl(form.venue_website),
     }
     try { await updateProfile(sanitized); setSaved(true); setTimeout(() => { setSaved(false); router.push('/profile') }, 1500) }
