@@ -60,30 +60,27 @@ function DiscoverPageInner() {
     try {
       let q = supabase.from('profiles')
         .select('id, full_name, city, country, roles, genres, bio, avatar_url, open_to_collaborate, experience_level, followers_count')
-        .range(pg * PAGE_SIZE, (pg + 1) * PAGE_SIZE - 1)
+        .not('full_name', 'is', null)
+        .not('roles', 'eq', '{}')
         .order('created_at', { ascending: false })
+        .range(pg * PAGE_SIZE, (pg + 1) * PAGE_SIZE - 1)
 
       if (currentUserId) q = q.neq('id', currentUserId)
       if (currentExp) q = q.eq('experience_level', currentExp)
-      // Location filter: 'remote' shows open_to_collaborate only remotely,
-      // 'local' uses available_days as proxy for in-person availability
-      // We filter client-side since it's a preference, not a strict DB field
+      // Filtrare server-side: rol si gen direct in DB query
+      if (currentRole) q = q.contains('roles', [currentRole])
+      if (currentGenre) q = q.contains('genres', [currentGenre])
+      // Search server-side pe full_name si city
+      if (currentSearch) q = q.or(`full_name.ilike.%${currentSearch}%,city.ilike.%${currentSearch}%`)
 
       const { data, error } = await q
       if (error) throw error
       const results = data || []
 
       const filtered = results.filter(m => {
-        // Ascunde profiluri incomplete - fara nume sau fara nici un rol setat
-        if (!m.full_name?.trim() || !m.roles?.length) return false
-        const q2 = currentSearch.toLowerCase()
-        const ms = !q2 || m.full_name?.toLowerCase().includes(q2) || m.city?.toLowerCase().includes(q2) || m.bio?.toLowerCase().includes(q2)
-        const mr = !currentRole || m.roles?.includes(currentRole)
-        const mg = !currentGenre || m.genres?.includes(currentGenre)
-        // Remote = show everyone (all musicians can work remotely)
-        // Local = show only musicians with a city listed
+        // Local = arata doar muzicieni cu oras completat
         const ml = !currentLocation || currentLocation === 'remote' || (currentLocation === 'local' && !!m.city)
-        return ms && mr && mg && ml
+        return ml
       })
 
       if (reset) setMusicians(filtered)
