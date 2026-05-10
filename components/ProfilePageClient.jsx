@@ -144,11 +144,12 @@ export default function ProfilePageClient({ userId }) {
       <div className="card" style={{ marginBottom: 16, padding: 0, overflow: 'hidden' }}>
         {/* Cover photo */}
         <div style={{ height: 160, background: profile.cover_image_url ? 'transparent' : 'linear-gradient(135deg, var(--bg3) 0%, var(--card2) 100%)', position: 'relative', overflow: 'hidden' }}>
-          {profile.cover_image_url
-            ? <img src={profile.cover_image_url} alt="cover" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            : <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.15 }}>
-                <div style={{ fontSize: 60 }}>🎵</div>
-              </div>}
+          {profile.cover_image_url && <img src={profile.cover_image_url} alt="cover" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+          {!profile.cover_image_url && (
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.15 }}>
+              <div style={{ fontSize: 60 }}>🎵</div>
+            </div>
+          )}
           {isOwn && (
             <button onClick={() => router.push('/edit-profile')} style={{ position: 'absolute', bottom: 10, right: 10, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, padding: '6px 12px', fontSize: 12, color: 'white', cursor: 'pointer', backdropFilter: 'blur(4px)' }}>
               ✏️ Edit cover
@@ -158,12 +159,15 @@ export default function ProfilePageClient({ userId }) {
         <div style={{ padding: '0 24px 24px', position: 'relative' }}>
           {/* Avatar suprapus */}
           <div style={{ width: 88, height: 88, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '4px solid var(--card)', position: 'absolute', top: -44, left: 24, background: 'var(--card)' }}>
-            {profile.avatar_url
-              ? <img src={profile.avatar_url} alt={profile.full_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              : <div style={{ width: '100%', height: '100%', background: getAvatarGradient(profile.id), display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 30, color: 'white' }}>{getInitials(profile.full_name) || '?'}</div>}
+            {profile.avatar_url && <img src={profile.avatar_url} alt={profile.full_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+            {!profile.avatar_url && (
+              <div style={{ width: '100%', height: '100%', background: getAvatarGradient(profile.id), display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 30, color: 'white' }}>
+                {getInitials(profile.full_name) || '?'}
+              </div>
+            )}
           </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, marginBottom: 20, marginTop: 52 }}>
-          <div style={{ width: 0 }} /> {/* spacer pentru avatar */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, marginBottom: 20, marginTop: 52 }}>
+            <div style={{ width: 0 }} />
 
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 6 }}>
@@ -195,26 +199,26 @@ export default function ProfilePageClient({ userId }) {
             </div>
           </div>
 
-          {/* Actions */}
-          <div style={{ display: 'flex', gap: 8, flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-            {isOwn ? (
-              <button className="btn btn-ghost btn-sm" onClick={() => router.push('/edit-profile')}>✏️ Edit profile</button>
-            ) : (
-              <>
-                <button className={`btn btn-sm ${isFollowing ? 'btn-ghost' : 'btn-brand'}`}
-                  disabled={followLoading}
-                  onClick={() => user ? toggleFollow() : router.push('/auth?mode=register')}>
-                  {isFollowing ? '✓ Following' : '+ Follow'}
-                </button>
-                <button className="btn btn-ghost btn-sm" onClick={async () => {
-                  if (!user) { router.push('/auth?mode=register'); return }
-                  try { const id = await getOrCreateConversation(user.id, targetId); router.push(`/messages?conv=${id}`) }
-                  catch { router.push('/messages') }
-                }}>💬 Message</button>
-              </>
-            )}
+            {/* Actions */}
+            <div style={{ display: 'flex', gap: 8, flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+              {isOwn ? (
+                <button className="btn btn-ghost btn-sm" onClick={() => router.push('/edit-profile')}>✏️ Edit profile</button>
+              ) : (
+                <>
+                  <button className={`btn btn-sm ${isFollowing ? 'btn-ghost' : 'btn-brand'}`}
+                    disabled={followLoading}
+                    onClick={() => user ? toggleFollow() : router.push('/auth?mode=register')}>
+                    {isFollowing ? '✓ Following' : '+ Follow'}
+                  </button>
+                  <button className="btn btn-ghost btn-sm" onClick={async () => {
+                    if (!user) { router.push('/auth?mode=register'); return }
+                    try { const id = await getOrCreateConversation(user.id, targetId); router.push(`/messages?conv=${id}`) }
+                    catch { router.push('/messages') }
+                  }}>💬 Message</button>
+                </>
+              )}
+            </div>
           </div>
-        </div>
 
         {/* Bio */}
         {profile.bio && (
@@ -263,6 +267,7 @@ export default function ProfilePageClient({ userId }) {
           </div>
         )}
         </div>
+      </div>
       </div>
 
       {/* Instruments */}
