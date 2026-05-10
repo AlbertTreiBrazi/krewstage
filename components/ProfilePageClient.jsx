@@ -171,7 +171,7 @@ export default function ProfilePageClient({ userId }) {
 
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 6 }}>
-              <h2 style={{ fontSize: 24, fontWeight: 800 }}>{profile.full_name || 'Anonymous Musician'}</h2>
+              <h2 style={{ fontSize: 24, fontWeight: 800, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%' }}>{profile.full_name || 'Anonymous Musician'}</h2>
               {profile.is_pro && <span className="badge badge-brand">PRO</span>}
               {expLevel && <span className={`badge ${expColor}`}>{expLevel.label}</span>}
             </div>
