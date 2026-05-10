@@ -6,12 +6,19 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 )
 
-export async function generateMetadata({ params }) {
-  const { data: p } = await supabase
+// Accepta atat UUID cat si slug
+async function getProject(projectId) {
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-/.test(projectId)
+  const { data } = await supabase
     .from('projects')
-    .select('title, description, genre, image_url, owner:profiles!projects_owner_id_fkey(full_name)')
-    .eq('id', params.projectId)
+    .select('id, title, description, genre, image_url, slug, owner:profiles!projects_owner_id_fkey(full_name)')
+    .eq(isUUID ? 'id' : 'slug', projectId)
     .single()
+  return data
+}
+
+export async function generateMetadata({ params }) {
+  const p = await getProject(params.projectId)
 
   if (!p) return { title: 'Project — KrewStage' }
 
@@ -37,6 +44,13 @@ export async function generateMetadata({ params }) {
 
 export const dynamic = 'force-dynamic'
 
-export default function ProjectPage({ params }) {
-  return <ProjectDetailClient projectId={params?.projectId || null} />
+export default async function ProjectPage({ params }) {
+  // Daca e slug, rezolva la UUID
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-/.test(params.projectId)
+  let projectId = params.projectId
+  if (!isUUID) {
+    const p = await getProject(params.projectId)
+    projectId = p?.id || params.projectId
+  }
+  return <ProjectDetailClient projectId={projectId} />
 }
