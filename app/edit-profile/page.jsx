@@ -125,16 +125,16 @@ export default function EditProfilePage() {
       {/* BASIC */}
       {tab === 'basic' && (
         <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 13 }}>
-          <div><label>Full name</label><input value={form.full_name} onChange={e => up('full_name', e.target.value)} placeholder="Alex Johnson" /></div>
+          <div><label>Full name</label><input value={form.full_name} onChange={e => up('full_name', e.target.value.slice(0,60))} maxLength={60} placeholder="Alex Johnson" /></div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            <div><label>City</label><input value={form.city} onChange={e => up('city', e.target.value)} placeholder="New York" /></div>
+            <div><label>City</label><input value={form.city} onChange={e => up('city', e.target.value.slice(0,60))} maxLength={60} placeholder="New York" /></div>
             <div><label>Country</label>
               <select value={form.country} onChange={e => up('country', e.target.value)}>
                 {[['US','United States'],['GB','UK'],['RO','Romania'],['DE','Germany'],['FR','France'],['ES','Spain'],['IT','Italy'],['BR','Brazil'],['CA','Canada'],['AU','Australia'],['NL','Netherlands'],['SE','Sweden'],['PL','Poland'],['Other','Other']].map(([v,l]) => <option key={v} value={v}>{l}</option>)}
               </select>
             </div>
           </div>
-          <div><label>Bio</label><textarea rows={4} value={form.bio} onChange={e => up('bio', e.target.value)} placeholder="Tell the community about yourself, your experience and what you're looking for..." style={{ resize: 'none' }} /></div>
+          <div><label>Bio</label><textarea rows={4} value={form.bio} onChange={e => up('bio', e.target.value.slice(0,500))} maxLength={500} placeholder="Tell the community about yourself, your experience and what you're looking for..." style={{ resize: 'none' }} /></div>
           <div>
             <label>Experience level</label>
             <div style={{ display: 'flex', gap: 8 }}>
@@ -233,7 +233,7 @@ export default function EditProfilePage() {
               <div className={`toggle ${form.is_venue ? 'on' : 'off'}`} onClick={() => up('is_venue', !form.is_venue)}><div className="toggle-thumb" /></div>
             </div>
             {form.is_venue && <>
-              <div><label>Venue name</label><input value={form.venue_name} onChange={e => up('venue_name', e.target.value)} placeholder="The Jazz Lounge, Club Nova..." /></div>
+              <div><label>Venue name</label><input value={form.venue_name} onChange={e => up('venue_name', e.target.value.slice(0,80))} maxLength={80} placeholder="The Jazz Lounge, Club Nova..." /></div>
               <div><label>Venue type</label>
                 <select value={form.venue_type} onChange={e => up('venue_type', e.target.value)}>
                   <option value="">Select type</option>
