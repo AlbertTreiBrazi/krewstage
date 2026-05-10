@@ -192,6 +192,17 @@ label { font-size: 13px; color: var(--text2); display: block; margin-bottom: 6px
   .footer { padding: 16px !important; flex-direction: column !important; align-items: flex-start !important; gap: 20px !important; }
 }
 
+/* Messages page responsive */
+@media (max-width: 768px) {
+  .messages-layout {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto 1fr !important;
+    height: calc(100vh - 70px) !important;
+    padding: 8px !important;
+    gap: 8px !important;
+  }
+}
+
 /* Small mobile: up to 480px */
 @media (max-width: 480px) {
   .hero-h1 { font-size: 24px !important; }
