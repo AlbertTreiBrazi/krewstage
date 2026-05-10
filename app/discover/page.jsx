@@ -203,9 +203,9 @@ function MusicianCard({ musician: m, onClick, onMessage, currentUserId }) {
   return (
     <div className="card card-hover" onClick={onClick} style={{ padding: 0, overflow: 'hidden' }}>
       {/* Photo area */}
-      <div style={{ height: 140, position: 'relative', overflow: 'hidden', background: `linear-gradient(135deg, ${grad})` }}>
+      <div style={{ height: 160, position: 'relative', overflow: 'hidden', background: `linear-gradient(135deg, ${grad})` }}>
         {m.avatar_url
-          ? <img src={m.avatar_url} alt={m.full_name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+          ? <img src={m.avatar_url} alt={m.full_name} style={{ width: '100%', height: '100%', objectFit: m.avatar_url.includes('dicebear') ? 'contain' : 'cover', objectPosition: 'center top', display: 'block' }} />
           : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 48, color: 'rgba(255,255,255,0.9)' }}>{initials}</div>
         }
         {m.open_to_collaborate && (
