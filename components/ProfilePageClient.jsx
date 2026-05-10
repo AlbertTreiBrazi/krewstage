@@ -64,11 +64,11 @@ export default function ProfilePageClient({ userId }) {
     }
   }
   async function fetchVideos(id) {
-    const { data } = await supabase.from('videos').select('*').eq('user_id', id).order('created_at', { ascending: false })
+    const { data } = await supabase.from('videos').select('*').eq('user_id', id).order('created_at', { ascending: false }).limit(12)
     setVideos(data || [])
   }
   async function fetchAudio(id) {
-    const { data } = await supabase.from('audio_demos').select('*').eq('user_id', id).order('created_at', { ascending: false })
+    const { data } = await supabase.from('audio_demos').select('*').eq('user_id', id).order('created_at', { ascending: false }).limit(20)
     setAudioDemos(data || [])
   }
   async function fetchProjects(id) {
