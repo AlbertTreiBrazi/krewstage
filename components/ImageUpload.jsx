@@ -18,7 +18,7 @@ export default function ImageUpload({
 
   async function handleFile(file) {
     if (!file) return
-    if (!file.type.startsWith('image/')) { alert('Selectează o imagine JPG, PNG sau WebP'); return }
+    if (!file.type.startsWith('image/')) { alert('Please select a JPG, PNG or WebP image'); return }
     if (file.size > 8 * 1024 * 1024) { alert('Max 8MB'); return }
     setPreview(URL.createObjectURL(file))
     setUploading(true)
