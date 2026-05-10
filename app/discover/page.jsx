@@ -196,49 +196,55 @@ function DiscoverPageInner() {
 
 function MusicianCard({ musician: m, onClick, onMessage, currentUserId }) {
   const expColors = { beginner: 'badge-blue', intermediate: 'badge-amber', professional: 'badge-green' }
+  const initials = (m.full_name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+  const gradients = ['#ff6b35,#ff8c42', '#a855f7,#7c3aed', '#3b82f6,#1d4ed8', '#10b981,#059669', '#f59e0b,#d97706']
+  const grad = gradients[(m.full_name?.charCodeAt(0) || 0) % gradients.length]
+
   return (
-    <div className="card card-hover" onClick={onClick}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, marginBottom: 14 }}>
-        <Avatar profile={m} size={48} />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 600, fontSize: 15, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.full_name}</div>
-          <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 2 }}>
-            {[m.city, m.country].filter(Boolean).join(', ')}
-          </div>
-          {m.experience_level && (
-            <span className={`badge ${expColors[m.experience_level] || 'badge-gray'}`} style={{ fontSize: 11, marginTop: 5 }}>
-              {m.experience_level}
-            </span>
-          )}
-        </div>
-        {m.open_to_collaborate && <span className="badge badge-green" style={{ flexShrink: 0, fontSize: 11 }}>Open</span>}
+    <div className="card card-hover" onClick={onClick} style={{ padding: 0, overflow: 'hidden' }}>
+      {/* Photo area */}
+      <div style={{ height: 140, position: 'relative', overflow: 'hidden', background: `linear-gradient(135deg, ${grad})` }}>
+        {m.avatar_url
+          ? <img src={m.avatar_url} alt={m.full_name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+          : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 48, color: 'rgba(255,255,255,0.9)' }}>{initials}</div>
+        }
+        {m.open_to_collaborate && (
+          <span className="badge badge-green" style={{ position: 'absolute', top: 10, right: 10, fontSize: 11 }}>Open</span>
+        )}
       </div>
 
-      {/* Roles */}
-      {m.roles?.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 10 }}>
-          {m.roles.slice(0, 3).map(r => <RoleBadge key={r} role={r} size="small" />)}
+      {/* Content */}
+      <div style={{ padding: '14px 16px 16px' }}>
+        <div style={{ fontWeight: 700, fontSize: 15, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginBottom: 3 }}>{m.full_name}</div>
+        <div style={{ fontSize: 12, color: 'var(--text2)', marginBottom: 8 }}>
+          {[m.city, m.country].filter(Boolean).join(', ')}
+          {m.experience_level && <span className={`badge ${expColors[m.experience_level] || 'badge-gray'}`} style={{ fontSize: 10, marginLeft: 6 }}>{m.experience_level}</span>}
         </div>
-      )}
 
-      {/* Genres */}
-      {m.genres?.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 10 }}>
-          {m.genres.slice(0, 3).map(g => <span key={g} className="badge badge-purple" style={{ fontSize: 11 }}>{g}</span>)}
-        </div>
-      )}
+        {m.roles?.length > 0 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 8 }}>
+            {m.roles.slice(0, 3).map(r => <RoleBadge key={r} role={r} size="small" />)}
+          </div>
+        )}
 
-      {m.bio && <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.5, marginBottom: 12, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{m.bio}</p>}
+        {m.genres?.length > 0 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 8 }}>
+            {m.genres.slice(0, 3).map(g => <span key={g} className="badge badge-purple" style={{ fontSize: 11 }}>{g}</span>)}
+          </div>
+        )}
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: 12, color: 'var(--text3)' }}>👥 {m.followers_count || 0} followers</span>
-        <div style={{ display: 'flex', gap: 7 }}>
-          {m.id !== currentUserId && (
-            <button className="btn btn-ghost btn-sm" onClick={onMessage}>
-              {currentUserId ? '💬 Message' : '🔓 Join to message'}
-            </button>
-          )}
-          <button className="btn btn-ghost-brand btn-sm" onClick={e => { e.stopPropagation(); onClick() }}>View profile</button>
+        {m.bio && <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.5, marginBottom: 10, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{m.bio}</p>}
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 10, borderTop: '1px solid var(--border)' }}>
+          <span style={{ fontSize: 11, color: 'var(--text3)' }}>👥 {m.followers_count || 0}</span>
+          <div style={{ display: 'flex', gap: 6 }}>
+            {m.id !== currentUserId && (
+              <button className="btn btn-ghost btn-sm" onClick={onMessage} style={{ fontSize: 12 }}>
+                {currentUserId ? '💬' : '🔓'}
+              </button>
+            )}
+            <button className="btn btn-ghost-brand btn-sm" onClick={e => { e.stopPropagation(); onClick() }} style={{ fontSize: 12 }}>View</button>
+          </div>
         </div>
       </div>
     </div>
