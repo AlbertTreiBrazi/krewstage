@@ -137,8 +137,8 @@ export default function CreateProjectPage() {
               />
             </div>
           </div>
-          <div style={{ marginBottom: 14 }}><label>Project title *</label><input placeholder='e.g. "Need vocalist for dark pop track"' value={form.title} onChange={e => up('title', e.target.value)} /></div>
-          <div style={{ marginBottom: 14 }}><label>Description</label><textarea rows={4} placeholder="Describe your project, what you've made so far, what you're looking for..." value={form.description} onChange={e => up('description', e.target.value)} style={{ resize: 'none' }} /></div>
+          <div style={{ marginBottom: 14 }}><label>Project title *</label><input placeholder='e.g. "Need vocalist for dark pop track"' value={form.title} onChange={e => up('title', e.target.value.slice(0,120))} maxLength={120} /></div>
+          <div style={{ marginBottom: 14 }}><label>Description</label><textarea rows={4} placeholder="Describe your project, what you've made so far, what you're looking for..." value={form.description} onChange={e => up('description', e.target.value.slice(0,2000))} maxLength={2000} style={{ resize: 'none' }} /></div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div><label>Genre</label>
               <select value={form.genre} onChange={e => up('genre', e.target.value)}>
