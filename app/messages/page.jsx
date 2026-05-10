@@ -134,7 +134,7 @@ function MessagesPageInner() {
   })
 
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px', height: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: '280px 1fr', gap: 14 }}>
+    <div className="messages-layout" style={{ maxWidth: 1100, margin: '0 auto', padding: '24px', height: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: '280px 1fr', gap: 14 }}>
 
       {/* Conversations panel */}
       <div className="card" style={{ padding: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
@@ -212,7 +212,7 @@ function MessagesPageInner() {
 
             {/* Input */}
             <div style={{ padding: '12px 16px', borderTop: '1px solid var(--border)', display: 'flex', gap: 10, alignItems: 'flex-end' }}>
-              <textarea value={newMsg} onChange={e => setNewMsg(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage() } }}
+              <textarea value={newMsg} onChange={e => setNewMsg(e.target.value.slice(0, 2000))} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage() } }} maxLength={2000}
                 placeholder="Type a message... (Enter to send)" rows={1} style={{ flex: 1, resize: 'none', minHeight: 40, maxHeight: 120 }} />
               <button onClick={sendMessage} disabled={!newMsg.trim() || sending}
                 style={{ width: 42, height: 42, borderRadius: 10, background: newMsg.trim() ? 'var(--brand)' : 'var(--bg3)', border: 'none', cursor: newMsg.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 18, transition: 'all 0.2s', color: 'white' }}>
