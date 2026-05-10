@@ -192,7 +192,7 @@ function MessagesPageInner() {
                 <div style={{ textAlign: 'center', paddingBottom: 8 }}>
                   <button onClick={() => fetchMessages(selectedConv, true)}
                     style={{ background: 'var(--bg3)', border: '1px solid var(--border)', borderRadius: 8, padding: '5px 16px', fontSize: 12, color: 'var(--text2)', cursor: 'pointer' }}>
-                    ↑ Mesaje mai vechi
+                    ↑ Load older messages
                   </button>
                 </div>
               )}
