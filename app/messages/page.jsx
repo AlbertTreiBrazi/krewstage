@@ -58,6 +58,7 @@ function MessagesPageInner() {
       .select('*, messages(content, created_at, sender_id), pa:profiles!conversations_participant_a_fkey(id, full_name, avatar_url), pb:profiles!conversations_participant_b_fkey(id, full_name, avatar_url)')
       .or(`participant_a.eq.${user.id},participant_b.eq.${user.id}`)
       .order('updated_at', { ascending: false })
+      .limit(50)
     // Sortam mesajele client-side pentru preview ultimului mesaj
     const sorted = (data || []).map(c => ({
       ...c,
