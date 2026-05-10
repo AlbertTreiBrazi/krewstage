@@ -1,5 +1,13 @@
 'use client'
 export const dynamic = 'force-dynamic'
+
+function generateSlug(title, id) {
+  const base = title.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .slice(0, 60)
+  return base + '-' + id.slice(0, 8)
+}
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../../lib/supabase'
@@ -16,7 +24,7 @@ export default function CreateProjectPage() {
   const [audioFile, setAudioFile] = useState(null)
   const [audioUploading, setAudioUploading] = useState(false)
   const [form, setForm] = useState({
-    title: '', description: '', genre: '', mood: '', image_url: '',
+    title: '', description: '', genre: '', mood: '', image_url: '', slug: '',
     project_type: 'collab', location_type: 'both', location_city: '',
     roles_needed: [], reference_links: [''],
     demo_audio_url: '', demo_audio_key: ''
@@ -61,10 +69,17 @@ export default function CreateProjectPage() {
         roles_needed: form.roles_needed,
         reference_links: refs, demo_audio_url: form.demo_audio_url || null,
         demo_audio_key: form.demo_audio_key || null, status: 'open',
-        image_url: form.image_url || null
+        image_url: form.image_url || null,
+        slug: null  // generated after insert with real id
       }).select().single()
       if (err) throw err
-      router.push(`/projects/${data.id}`)
+      // Genereaza si salveaza slug-ul dupa ce avem ID-ul real
+      const slug = data.title.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .slice(0, 60) + '-' + data.id.slice(0, 8)
+      await supabase.from('projects').update({ slug }).eq('id', data.id)
+      router.push(`/projects/${slug}`)
     } catch (err) { setError(err.message) }
     finally { setSaving(false) }
   }
