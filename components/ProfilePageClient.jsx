@@ -268,7 +268,6 @@ export default function ProfilePageClient({ userId }) {
         )}
         </div>
       </div>
-      </div>
 
       {/* Instruments */}
       {profile.instruments?.length > 0 && (
