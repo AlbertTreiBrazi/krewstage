@@ -17,6 +17,7 @@ function MessagesPageInner() {
   const [selectedConv, setSelectedConv] = useState(null)
   const [otherProfile, setOtherProfile] = useState(null)
   const [messages, setMessages] = useState([])
+  const [hasMoreMessages, setHasMoreMessages] = useState(false)
   const [newMsg, setNewMsg] = useState('')
   const [sending, setSending] = useState(false)
   const [convSearch, setConvSearch] = useState('')
@@ -65,9 +66,23 @@ function MessagesPageInner() {
     setConversations(sorted)
   }
 
-  async function fetchMessages(convId) {
-    const { data } = await supabase.from('messages').select('*').eq('conversation_id', convId).order('created_at')
-    setMessages(data || [])
+  const MSGS_PER_PAGE = 50
+
+  async function fetchMessages(convId, loadMore = false) {
+    const currentCount = loadMore ? messages.length : 0
+    const { data } = await supabase
+      .from('messages')
+      .select('*')
+      .eq('conversation_id', convId)
+      .order('created_at', { ascending: false })
+      .range(currentCount, currentCount + MSGS_PER_PAGE - 1)
+    const fetched = (data || []).reverse()
+    if (loadMore) {
+      setMessages(prev => [...fetched, ...prev])
+    } else {
+      setMessages(fetched)
+    }
+    setHasMoreMessages((data || []).length === MSGS_PER_PAGE)
   }
 
   async function loadOtherProfile(convId) {
@@ -172,6 +187,14 @@ function MessagesPageInner() {
 
             {/* Messages */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {hasMoreMessages && (
+                <div style={{ textAlign: 'center', paddingBottom: 8 }}>
+                  <button onClick={() => fetchMessages(selectedConv, true)}
+                    style={{ background: 'var(--bg3)', border: '1px solid var(--border)', borderRadius: 8, padding: '5px 16px', fontSize: 12, color: 'var(--text2)', cursor: 'pointer' }}>
+                    ↑ Mesaje mai vechi
+                  </button>
+                </div>
+              )}
               {messages.map(msg => {
                 const mine = msg.sender_id === user.id
                 return (
