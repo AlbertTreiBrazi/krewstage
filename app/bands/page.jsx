@@ -93,7 +93,6 @@ function BandCard({ band, currentUserId, onClick }) {
         {(isMember || isOwner) && <span style={{ background: 'var(--bg3)', borderRadius: 100, padding: '2px 10px', fontSize: 11, color: 'var(--text2)', flexShrink: 0 }}>{isOwner ? '👑 Owner' : '✓ Member'}</span>}
       </div>
       <div style={{ padding: '14px 18px 18px' }}>
-        <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 8 }}>{band.name}</h3>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 10 }}>
           {band.genre && <span className="badge badge-purple">{band.genre}</span>}
           {band.city && <span className="badge badge-blue">📍 {band.city}</span>}
