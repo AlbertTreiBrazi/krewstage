@@ -71,7 +71,7 @@ export default function ProjectDetailClient({ projectId }) {
     try {
       const [{ data: proj }, { data: apps }] = await Promise.all([
         supabase.from('projects').select('*, owner:profiles!projects_owner_id_fkey(id, full_name, avatar_url, city, roles)').eq('id', projectId).single(),
-        supabase.from('project_applications').select('*, applicant:profiles!project_applications_applicant_id_fkey(id, full_name, avatar_url, roles, city)').eq('project_id', projectId)
+        supabase.from('project_applications').select('*, applicant:profiles!project_applications_applicant_id_fkey(id, full_name, avatar_url, roles, city)').eq('project_id', projectId).limit(100)
       ])
       setProject(proj || null)
       setApplications(apps || [])
