@@ -201,7 +201,7 @@ function MusicianCard({ musician: m, onClick, onMessage, currentUserId }) {
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, marginBottom: 14 }}>
         <Avatar profile={m} size={48} />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 600, fontSize: 15 }}>{m.full_name}</div>
+          <div style={{ fontWeight: 600, fontSize: 15, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.full_name}</div>
           <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 2 }}>
             {[m.city, m.country].filter(Boolean).join(', ')}
           </div>
