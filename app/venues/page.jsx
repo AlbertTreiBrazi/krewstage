@@ -25,7 +25,7 @@ export default function VenuePage() {
     try {
       const [{ data: venueProfiles }, { data: gigs }] = await Promise.all([
         supabase.from('profiles')
-          .select('id, full_name, city, country, bio, avatar_url, roles, genres, venue_name, venue_type, venue_capacity, venue_website, followers_count')
+          .select('id, full_name, city, country, bio, avatar_url, cover_image_url, roles, genres, venue_name, venue_type, venue_capacity, venue_website, followers_count')
           .contains('roles', ['venue'])
           .order('created_at', { ascending: false })
           .limit(40),
@@ -117,11 +117,20 @@ export default function VenuePage() {
 
 function VenueCard({ venue: v, onClick }) {
   return (
-    <div className="card card-hover" onClick={onClick}>
+    <div className="card card-hover" onClick={onClick} style={{ padding: 0, overflow: 'hidden' }}>
+      {/* Venue cover photo */}
+      <div style={{ height: 110, position: 'relative', overflow: 'hidden', background: v.cover_image_url ? 'transparent' : 'linear-gradient(135deg, var(--bg3) 0%, var(--card2) 100%)' }}>
+        {v.cover_image_url && <img src={v.cover_image_url} alt={v.venue_name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+        {!v.cover_image_url && <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36, opacity: 0.2 }}>🏛️</div>}
+        <div style={{ position: 'absolute', bottom: -20, left: 14, width: 42, height: 42, borderRadius: '50%', border: '3px solid var(--card)', overflow: 'hidden', background: 'var(--card)' }}>
+          <Avatar profile={v} size={42} />
+        </div>
+      </div>
+      <div style={{ padding: '26px 14px 14px' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, marginBottom: 12 }}>
-        <Avatar profile={v} size={48} />
+        <div style={{ width: 0 }} />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 700, fontSize: 15 }}>{v.venue_name || v.full_name}</div>
+          <div style={{ fontWeight: 700, fontSize: 15, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.venue_name || v.full_name}</div>
           <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 2 }}>
             {v.venue_type && <span>{v.venue_type} · </span>}
             {[v.city, v.country].filter(Boolean).join(', ')}
@@ -150,6 +159,7 @@ function VenueCard({ venue: v, onClick }) {
             <button className="btn btn-ghost btn-sm">🌐 Website</button>
           </a>
         )}
+      </div>
       </div>
     </div>
   )
