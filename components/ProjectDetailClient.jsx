@@ -84,7 +84,7 @@ export default function ProjectDetailClient({ projectId }) {
   }
 
   async function fetchMessages() {
-    const { data } = await supabase.from('project_messages').select('*, sender:profiles!project_messages_sender_id_fkey(id, full_name, avatar_url)').eq('project_id', projectId).order('created_at')
+    const { data } = await supabase.from('project_messages').select('*, sender:profiles!project_messages_sender_id_fkey(id, full_name, avatar_url)').eq('project_id', projectId).order('created_at').limit(100)
     setChatMessages(data || [])
   }
 
