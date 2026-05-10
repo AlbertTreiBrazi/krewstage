@@ -143,8 +143,8 @@ export default function ProfilePageClient({ userId }) {
       {/* Profile header */}
       <div className="card" style={{ marginBottom: 16, padding: 0, overflow: 'hidden' }}>
         {/* Cover photo */}
-        <div style={{ height: 160, background: profile.cover_image_url ? 'transparent' : 'linear-gradient(135deg, var(--bg3) 0%, var(--card2) 100%)', position: 'relative', overflow: 'hidden' }}>
-          {profile.cover_image_url && <img src={profile.cover_image_url} alt="cover" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+        <div style={{ height: 240, background: profile.cover_image_url ? 'transparent' : 'linear-gradient(135deg, var(--bg3) 0%, var(--card2) 100%)', position: 'relative', overflow: 'hidden' }}>
+          {profile.cover_image_url && <img src={profile.cover_image_url} alt="cover" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />}
           {!profile.cover_image_url && (
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.15 }}>
               <div style={{ fontSize: 60 }}>🎵</div>
@@ -158,7 +158,7 @@ export default function ProfilePageClient({ userId }) {
         </div>
         <div style={{ padding: '0 24px 24px', position: 'relative' }}>
           {/* Avatar suprapus */}
-          <div style={{ width: 88, height: 88, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '4px solid var(--card)', position: 'absolute', top: -44, left: 24, background: 'var(--card)' }}>
+          <div style={{ width: 96, height: 96, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '4px solid var(--card)', position: 'absolute', top: -48, left: 24, background: 'var(--card)' }}>
             {profile.avatar_url && <img src={profile.avatar_url} alt={profile.full_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
             {!profile.avatar_url && (
               <div style={{ width: '100%', height: '100%', background: getAvatarGradient(profile.id), display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Syne,sans-serif', fontWeight: 800, fontSize: 30, color: 'white' }}>
@@ -166,7 +166,7 @@ export default function ProfilePageClient({ userId }) {
               </div>
             )}
           </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, marginBottom: 20, marginTop: 52 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, marginBottom: 20, marginTop: 58 }}>
             <div style={{ width: 0 }} />
 
           <div style={{ flex: 1 }}>
