@@ -113,7 +113,11 @@ export default function EditProfilePage() {
         </div>
         <div style={{ padding: '40px 20px 16px' }}>
           <div style={{ fontWeight: 600, fontSize: 14 }}>Profile photo & cover</div>
-          <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 4 }}>Click pe poză sau cover pentru a le schimba · JPG, PNG, WebP · max 8MB</div>
+          <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 4, lineHeight: 1.6 }}>
+            📷 <strong>Cover photo</strong> (bannerul mare): dimensiune recomandată <strong>1200 × 400px</strong> sau orice poză orizontală — concert, studio, scenă.<br/>
+            👤 <strong>Avatar</strong> (cercul mic): dimensiune recomandată <strong>400 × 400px</strong> — poza ta de față. Poza va fi tăiată în cerc.<br/>
+            Format: JPG, PNG sau WebP · max 8MB fiecare.
+          </div>
         </div>
       </div>
 
