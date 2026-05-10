@@ -1,5 +1,12 @@
 'use client'
 export const dynamic = 'force-dynamic'
+import { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
+import { supabase } from '../../../lib/supabase'
+import { useAuth } from '../../../hooks/useAuth'
+import { ROLES, GENRES, MOODS, PROJECT_TYPES, LOCATION_TYPES } from '../../../lib/constants'
+
+import ImageUpload from '../../../components/ImageUpload'
 
 function generateSlug(title, id) {
   const base = title.toLowerCase()
@@ -8,12 +15,6 @@ function generateSlug(title, id) {
     .slice(0, 60)
   return base + '-' + id.slice(0, 8)
 }
-import { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
-import { supabase } from '../../../lib/supabase'
-import { useAuth } from '../../../hooks/useAuth'
-import { ROLES, GENRES, MOODS, PROJECT_TYPES, LOCATION_TYPES } from '../../../lib/constants'
-import ImageUpload from '../../../components/ImageUpload'
 
 export default function CreateProjectPage() {
   const { user, loading } = useAuth()
